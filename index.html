@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Эконометрика</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="bg-light mb-2">
+    <div class="container">
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Эконометрика</a>
+            </li>
+
+        </ul>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <form class="row" action="">
+                    <div class="col-6">
+                    <textarea class="col-12" name="dataX" id="dataX" placeholder="X" cols="30" rows="10">
+45,1
+59
+57,2
+61,8
+58,8
+47,2
+55,2
+
+
+                    </textarea>
+                    </div>
+                    <div class="col-6">
+                    <textarea class="col-12" name="dataY" id="dataY" placeholder="Y" cols="30" rows="10">
+68,8
+61,2
+59,9
+56,7
+55
+54,3
+49,3
+
+
+
+                    </textarea>
+                    </div>
+                    <button class="btn btn-block btn-primary start">Рассчитать</button>
+                </form>
+
+
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+                <div class="col-6 p-2 badge badge-info">
+                    <p class="m-2">Количество строк X - <span class="Xlength"> </span></p>
+                </div>
+                <div class="col-6 p-2 badge badge-dark">
+<p class="m-2">                    Количество строк Y - <span class="Ylength"> </span>
+</p>
+                </div>
+
+
+
+        </div>
+    </div>
+
+</section>
+
+
+<script src="lib/jquery/jquery-3.3.1.min.js"></script>
+<script src="lib/bootstrap/bootstrap.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
