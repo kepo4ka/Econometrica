@@ -5,6 +5,7 @@ $(document).ready(function () {
     const $start = $('.start');
     let x = [];
     let y = [];
+    let n = 0;
 
     let sum = {};
     let calc = {};
@@ -14,6 +15,7 @@ $(document).ready(function () {
         e.preventDefault();
         x = getData($Xinput);
         y = getData($Yinput);
+        n = x.length;
 
         $('.Xlength').text(x.length);
         $('.Ylength').text(y.length);
@@ -22,6 +24,8 @@ $(document).ready(function () {
         sum.x = getArraySum(x);
         sum.y = getArraySum(y);
 
+        calc['x'] = x;
+        calc['y'] = y;
         calc['xy'] = multiple(x, y);
         calc['x_pow_2'] = pow_2(x);
         calc['y_pow_2'] = pow_2(y);
@@ -37,12 +41,34 @@ $(document).ready(function () {
         calc['y_gamma_pow_2'] = get_gamma_pow_2('y');
         calc['y_gamma'] = get_gamma('y');
         calc['r_xy'] = get_r_xy();
-        cacl['r_xy_pow_2'] = calc.r_xy * calc.r_xy;
+        calc['r_xy_pow_2'] = calc.r_xy * calc.r_xy;
+        
+        calc['y_teor'] = get_y_teor();
+      
+        calc['y__dif__y_teor'] = get_y__dif__y_teor();
 
         console.log(calc);
     });
 
 
+    function get_y__dif__y_teor() {
+        let array = [];
+        for (let i = 0; i < n; i++) {
+            let res = calc.y[i] - calc.y_teor[i];
+            array.push(res);
+        }
+        return array;
+    }
+
+
+    function get_y_teor() {
+        let array = [];
+        for (let i = 0; i < n; i++) {
+            let res = calc.a + calc.b * calc.x[i];
+            array.push(res);
+        }
+        return array;
+    }
 
 
     function get_r_xy() {
