@@ -32,24 +32,52 @@ $(document).ready(function () {
         calc['y_pow_2_average'] = average(calc.y_pow_2);
         calc['b'] = get_b();
         calc['a'] = get_a();
-        calc['r_xy_pow_2'] = get_r_xy_pow_2();
+        calc['x_gamma_pow_2'] = get_gamma_pow_2('x');
+        calc['x_gamma'] = get_gamma('x');
+        calc['y_gamma_pow_2'] = get_gamma_pow_2('y');
+        calc['y_gamma'] = get_gamma('y');
         calc['r_xy'] = get_r_xy();
-        
+        cacl['r_xy_pow_2'] = calc.r_xy * calc.r_xy;
+
         console.log(calc);
     });
 
 
-    function get_r_xy_pow_2()
-    {
-        let res = calc.y_pow_2_average -calc.y_average * calc.y_average;
+
+
+    function get_r_xy() {
+        let res = calc.b * (calc.x_gamma / calc.y_gamma);
         return res;
     }
 
-    function get_r_xy()
-    {
-        let res = Math.sqrt(calc.y_pow_2_average);
+
+    function get_gamma_pow_2(t) {
+        let res = 0;
+        switch (t) {
+            case 'x':
+                res = calc.x_pow_2_average - calc.x_average * calc.x_average;
+                break;
+            case 'y':
+                res = calc.y_pow_2_average - calc.y_average * calc.y_average;
+                break;
+        }
         return res;
     }
+
+    function get_gamma(t) {
+        let res = 0;
+
+        switch (t) {
+            case 'x':
+                res = Math.sqrt(calc.x_gamma_pow_2);
+                break;
+            case 'y':
+                res = Math.sqrt(calc.y_gamma_pow_2);
+                break;
+        }
+        return res;
+    }
+
 
     function get_a() {
         let res = calc.y_average - calc.b * calc.x_average;
