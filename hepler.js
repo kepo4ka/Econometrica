@@ -1,6 +1,3 @@
-
-
-
 function arrayStrFormat(array) {
     let str = '';
 
@@ -15,22 +12,34 @@ function get_cheddoka(value) {
     let str = "Теснота связи - ";
 
     if (value < 0.1) {
+        str += "<strong class='text-danger'>";
         str += "Очень Слабая";
+        str += "</strong>";
     }
     else if (value < 0.3) {
+        str += "<strong class='text-secondary'>";
         str += "Слабая";
+        str += "</strong>";
     }
     else if (value < 0.5) {
+        str += "<strong class='text-info'>";
         str += "Умеренная";
+        str += "</strong>";
     }
     else if (value < 0.7) {
+        str += "<strong class='text-primary'>";
         str += "Заметная";
+        str += "</strong>";
     }
     else if (value < 0.9) {
+        str += "<strong class='text-success'>";
         str += "Высокая";
+        str += "</strong>";
     }
     else if (value >= 0.9) {
+        str += "<strong class='text-warning'>";
         str += "Весьма Высокая";
+        str += "</strong>";
     }
     return str;
 }

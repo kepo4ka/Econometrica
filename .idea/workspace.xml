@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/script.js" line="427" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/script.js" line="293" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/script.js" line="280" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/script.js" line="123" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdbecd8a-06ba-4094-bb23-04f19eab6f98" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hepler.js" afterPath="$PROJECT_DIR$/hepler.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script.js" afterPath="$PROJECT_DIR$/script.js" />
     </list>
     <ignored path="econom.iws" />
@@ -34,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="552">
-              <caret line="136" column="39" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
+              <caret line="136" column="39" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -43,13 +42,10 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="441" column="0" selection-start-line="441" selection-start-column="0" selection-end-line="441" selection-end-column="0" />
+            <state relative-caret-position="443">
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding>
-                <element signature="e#814#1592#0" expanded="false" />
-                <element signature="e#1617#2566#0" expanded="false" />
-                <element signature="e#2595#3374#0" expanded="false" />
-                <element signature="e#3398#3534#0" expanded="false" />
+                <element signature="e#2616#2707#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -58,8 +54,8 @@
       <file leaf-file-name="hepler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hepler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="238">
+              <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
               <folding>
                 <element signature="n#!!block;n#getArraySum#0" expanded="false" />
                 <element signature="n#!!block;n#mround#0" expanded="false" />
@@ -77,8 +73,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/hepler.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/hepler.js" />
         <option value="$PROJECT_DIR$/script.js" />
       </list>
     </option>
@@ -193,12 +189,12 @@
       <option name="presentableId" value="Default" />
       <updated>1545764383189</updated>
       <workItem from="1545764384336" duration="5193000" />
-      <workItem from="1545837011891" duration="9975000" />
+      <workItem from="1545837011891" duration="11097000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15168000" />
+    <option name="totallyTimeSpent" value="16290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -245,10 +241,7 @@
         <state relative-caret-position="578">
           <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
           <folding>
-            <element signature="e#814#1592#0" expanded="false" />
-            <element signature="e#1617#2566#0" expanded="false" />
-            <element signature="e#2595#3374#0" expanded="false" />
-            <element signature="e#3398#3534#0" expanded="false" />
+            <element signature="e#2616#2707#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -256,15 +249,32 @@
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
-          <caret line="136" column="39" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
+          <caret line="136" column="39" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="39" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/bootstrap/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="5" column="143435" selection-start-line="5" selection-start-column="143435" selection-end-line="5" selection-end-column="143435" />
+          <folding>
+            <element signature="e#61909#62109#2" expanded="true" />
+            <element signature="e#62317#62466#2" expanded="true" />
+            <element signature="e#62968#63114#2" expanded="true" />
+            <element signature="e#63415#63581#1" expanded="true" />
+            <element signature="e#74301#74544#2" expanded="true" />
+            <element signature="e#75411#75660#2" expanded="true" />
+            <element signature="e#101957#102147#2" expanded="true" />
+            <element signature="e#102193#102383#2" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hepler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
           <folding>
             <element signature="n#!!block;n#getArraySum#0" expanded="false" />
             <element signature="n#!!block;n#mround#0" expanded="false" />
@@ -275,13 +285,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="441" column="0" selection-start-line="441" selection-start-column="0" selection-end-line="441" selection-end-column="0" />
+        <state relative-caret-position="443">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
           <folding>
-            <element signature="e#814#1592#0" expanded="false" />
-            <element signature="e#1617#2566#0" expanded="false" />
-            <element signature="e#2595#3374#0" expanded="false" />
-            <element signature="e#3398#3534#0" expanded="false" />
+            <element signature="e#2616#2707#0" expanded="false" />
           </folding>
         </state>
       </provider>
