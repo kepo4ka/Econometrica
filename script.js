@@ -14,24 +14,19 @@ $(document).ready(function () {
     let sum = {};
     let calc = {};
 
-    setup();
-    window.test = new Stepen(x, y);
-
-
     $linear_model_btn.on('click', function (e) {
         e.preventDefault();
         setup();
-        const linear_reg = new Linear(x,y);
+        const linear_reg = new Linear(x, y);
         linear_reg.show();
     });
 
     $stepen_model_btn.on('click', function (e) {
         e.preventDefault();
         setup();
-        const stepen_reg = new Stepen(x,y);
+        const stepen_reg = new Stepen(x, y);
         stepen_reg.show();
     });
-
 
 
     function setup() {
