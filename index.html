@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Эконометрика</title>
@@ -7,28 +8,29 @@
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="bg-light mb-2">
-    <div class="container">
+    <header class="bg-light mb-2">
+        <div class="container">
 
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Эконометрика</a>
-            </li>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Эконометрика</a>
+                </li>
 
-        </ul>
-    </div>
-</header>
+            </ul>
+        </div>
+    </header>
 
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
 
-                <form class="row" action="">
-                    <div class="col-6">
-                    <textarea class="col-12" name="dataX" id="dataX" placeholder="X" cols="30" rows="10">
+                    <form class="row" action="">
+                        <div class="col-6">
+                            <textarea class="col-12" name="dataX" id="dataX" placeholder="X" cols="30" rows="10">
 45,1
 59
 57,2
@@ -39,9 +41,9 @@
 
 
                     </textarea>
-                    </div>
-                    <div class="col-6">
-                    <textarea class="col-12" name="dataY" id="dataY" placeholder="Y" cols="30" rows="10">
+                        </div>
+                        <div class="col-6">
+                            <textarea class="col-12" name="dataY" id="dataY" placeholder="Y" cols="30" rows="10">
 68,8
 61,2
 59,9
@@ -53,94 +55,103 @@
 
 
                     </textarea>
-                    </div>
-                    <button class="btn btn-block btn-primary start">Рассчитать</button>
-                </form>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col-12">
+                                <button class="btn btn-info linear_model_btn">Линейная функция</button>
+                                <button class="btn btn-warning stepen_model_btn">Степенная функция</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-block btn-primary start">Рассчитать</button>
+                    </form>
+
+
+                </div>
+            </div>
+
+
+            <div class="row mt-3">
+
+
+                <table class="table linear_regress">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Показатель</th>
+                            <th>Значение</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Коэффициент b
+                            </td>
+                            <td class="var_b"></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Коэффициент a
+                            </td>
+                            <td class="var_a"></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Уравнение регресии (^y^)
+                            </td>
+                            <td class="var_regres_function"></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Линейный Коэффициент парной корреляции (Rxy)
+                            </td>
+                            <td class="var_r_xy"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Коэффициент детерминации (Rxy^2)
+                            </td>
+                            <td class="var_r_xy_pow_2"></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Шкала Чеддока
+                            </td>
+                            <td class="var_cheddoka"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Величина средней аппроксимации A
+                            </td>
+                            <td class="var_A_average"></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                F-критерий (Fфакт)
+                            </td>
+                            <td class="var_F_fact"></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
 
 
             </div>
         </div>
 
-
-        <div class="row mt-3">
-                
-
-            <table class="table linear_regress">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Показатель</th>
-                        <th>Значение</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Коэффициент b
-                        </td>
-                        <td class="var_b"></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Коэффициент a
-                        </td>
-                        <td class="var_a"></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Уравнение регресии (^y^)
-                        </td>
-                        <td class="var_regres_function"></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Линейный Коэффициент парной корреляции (Rxy)
-                        </td>
-                        <td class="var_r_xy"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Коэффициент детерминации (Rxy^2)
-                        </td>
-                        <td class="var_r_xy_pow_2"></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            Шкала Чеддока
-                        </td>
-                        <td class="var_cheddoka"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                           Величина средней аппроксимации A
-                        </td>
-                        <td class="var_A_average"></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                           F-критерий (Fфакт)
-                        </td>
-                        <td class="var_F_fact"></td>
-                    </tr>
-
-                </tbody>
-
-            </table>
+    </section>
 
 
-
-        </div>
-    </div>
-
-</section>
-
-
-<script src="lib/jquery/jquery-3.3.1.min.js"></script>
-<script src="lib/bootstrap/bootstrap.min.js"></script>
-<script src="script.js"></script>
+    <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="lib/bootstrap/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
