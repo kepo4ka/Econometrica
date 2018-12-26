@@ -3,34 +3,100 @@ $(document).ready(function () {
     const $Xinput = $('#dataX');
     const $Yinput = $('#dataY');
     const $start = $('.start');
+    const $stepen_model_btn = $('.stepen_model_btn');
+    const $linear_model_btn = $('.linear_model_btn');
+
     let x = [];
     let y = [];
+    let setted = false;
     let n = 0;
 
     let sum = {};
     let calc = {};
 
 
-    $start.on('click', function (e) {
+
+    $linear_model_btn.on('click', function (e) {
         e.preventDefault();
-        x = getData($Xinput);
-        y = getData($Yinput);
+        if (x.length > 0 || x.length > 0) {
+
+            $Xinput.html(arrayStrFormat(x));
+            $Yinput.html(arrayStrFormat(y));
+        }
+       
+    });
+
+    $stepen_model_btn.on('click', function (e) {
+        e.preventDefault();
+        if (!setted) {
+            setted = true;
+            x = getData($Xinput);
+            y = getData($Yinput);
+        }
+        calc['x'] = getData($Xinput);
+        calc['y'] = getData($Yinput);
+
+
+        calc.x = lg(calc.x);
+        calc.y = lg(calc.y);
+       
+
+        $Xinput.html(arrayStrFormat(calc.x));
+        $Yinput.html(arrayStrFormat(calc.y));
+
+    });
+
+    $start.on('click', function(e)
+    {
+        e.preventDefault();
+
+        start();
+        showVar();
+    });
+
+
+    function arrayStrFormat(array) {
+        let str = '';
+
+        for (let i = 0; i < array.length; i++) {
+            str += array[i] + "\n";
+        }
+        return str;
+
+    }
+
+    function lg(p_array) {
+        let array = [];
+
+        for (let i = 0; i < p_array.length; i++) {
+            array.push(Math.log10(p_array[i]));
+        }
+        return array;
+    }
+
+    function start() {
+        if (!setted) {
+            setted = true;
+            x = getData($Xinput);
+            y = getData($Yinput);
+        }
+
+
         n = x.length;
-
-        $('.Xlength').text(x.length);
-        $('.Ylength').text(y.length);
-
 
         sum.x = getArraySum(x);
         sum.y = getArraySum(y);
 
-        calc['x'] = x;
-        calc['y'] = y;
-        calc['xy'] = multiple(x, y);
-        calc['x_pow_2'] = pow_2(x);
-        calc['y_pow_2'] = pow_2(y);
-        calc['x_average'] = average(x);
-        calc['y_average'] = average(y);
+        calc['x'] = getData($Xinput);
+        calc['y'] = getData($Yinput);
+
+        
+
+        calc['xy'] = multiple(calc.x, calc.y);
+        calc['x_pow_2'] = pow_2(calc.x);
+        calc['y_pow_2'] = pow_2(calc.y);
+        calc['x_average'] = average(calc.x);
+        calc['y_average'] = average(calc.y);
         calc['xy_average'] = average(calc.xy);
         calc['x_pow_2_average'] = average(calc.x_pow_2);
         calc['y_pow_2_average'] = average(calc.y_pow_2);
@@ -49,10 +115,7 @@ $(document).ready(function () {
         calc['A'] = get_A();
         calc['A_average'] = average(calc.A);
         calc['F_fact'] = get_F_fact();
-
-        showVar();
-        
-    });
+    }
 
 
 
@@ -77,9 +140,7 @@ $(document).ready(function () {
         $cheddoka.html(get_cheddoka(calc.r_xy));
         $A_average.html(calc.A_average);
         $F_fact.html(calc.F_fact);
-
-
-
+        console.log(calc);
     }
 
 
