@@ -32,9 +32,24 @@ $(document).ready(function () {
         calc['y_pow_2_average'] = average(calc.y_pow_2);
         calc['b'] = get_b();
         calc['a'] = get_a();
+        calc['r_xy_pow_2'] = get_r_xy_pow_2();
+        calc['r_xy'] = get_r_xy();
+        
         console.log(calc);
     });
 
+
+    function get_r_xy_pow_2()
+    {
+        let res = calc.y_pow_2_average -calc.y_average * calc.y_average;
+        return res;
+    }
+
+    function get_r_xy()
+    {
+        let res = Math.sqrt(calc.y_pow_2_average);
+        return res;
+    }
 
     function get_a() {
         let res = calc.y_average - calc.b * calc.x_average;
