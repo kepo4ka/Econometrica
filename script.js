@@ -42,14 +42,87 @@ $(document).ready(function () {
         calc['y_gamma'] = get_gamma('y');
         calc['r_xy'] = get_r_xy();
         calc['r_xy_pow_2'] = calc.r_xy * calc.r_xy;
-        
-        calc['y_teor'] = get_y_teor();
-      
-        calc['y__dif__y_teor'] = get_y__dif__y_teor();
 
-        console.log(calc);
+        calc['y_teor'] = get_y_teor();
+
+        calc['y__dif__y_teor'] = get_y__dif__y_teor();
+        calc['A'] = get_A();
+        calc['A_average'] = average(calc.A);
+        calc['F_fact'] = get_F_fact();
+
+        showVar();
+        
     });
 
+
+
+    function showVar() {
+        const $linear_regress = $('.linear_regress');
+        const $b = $linear_regress.find('.var_b');
+        const $a = $linear_regress.find('.var_a');
+        const $regres_function = $linear_regress.find('.var_regres_function');
+        const $r_xy = $linear_regress.find('.var_r_xy');
+        const $r_xy_pow_2 = $linear_regress.find('.var_r_xy_pow_2');
+
+        const $cheddoka = $linear_regress.find('.var_cheddoka');
+        const $A_average = $linear_regress.find('.var_A_average');
+        const $F_fact = $linear_regress.find('.var_F_fact');
+
+        $b.html(calc.b);
+        $a.html(calc.a);
+
+        $regres_function.html(calc.a + " + " + calc.b + " * x");
+        $r_xy.html(calc.r_xy);
+        $r_xy_pow_2.html(calc.r_xy_pow_2);
+        $cheddoka.html(get_cheddoka(calc.r_xy));
+        $A_average.html(calc.A_average);
+        $F_fact.html(calc.F_fact);
+
+
+
+    }
+
+
+
+
+    function get_cheddoka(value) {
+        let str = "Теснота связи - ";
+
+        if (value < 0.1) {
+            str += "Очень Слабая";
+        }
+        else if (value < 0.3) {
+            str += "Слабая";
+        }
+        else if (value < 0.5) {
+            str += "Умеренная";
+        }
+        else if (value < 0.7) {
+            str += "Заметная";
+        }
+        else if (value < 0.9) {
+            str += "Высокая";
+        }
+        else if (value >= 0.9) {
+            str += "Весьма Высокая";
+        }
+        return str;
+    }
+
+
+    function get_F_fact() {
+        return calc.r_xy_pow_2 / (1 - calc.r_xy_pow_2) * (n - 2);
+    }
+
+    function get_A() {
+        let array = [];
+
+        for (let i = 0; i < n; i++) {
+            let res = Math.abs(calc.y__dif__y_teor[i] / calc.y[i]) * 100;
+            array.push(res);
+        }
+        return array;
+    }
 
     function get_y__dif__y_teor() {
         let array = [];
