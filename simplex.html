@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Симплекс метод</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="bg-light mb-2">
+    <div class="container">
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Симплекс метод</a>
+            </li>
+
+        </ul>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <form class="row" action="">
+                    <div class="col-12">
+                            <textarea class="col-12" name="canonMatrix" id="canonMatrix"
+                                      placeholder="Коэфициенты уравнений канонического вида. В первой строке сама функция. Далее матрица ограничений"
+                                      cols="30" rows="15">
+3 2 0 0 0 0 0
+2 3 1 0 0 0 21
+1 0 0 1 0 0 4
+0 1 0 0 1 0 6
+2 1 0 0 0 1 10
+                    </textarea>
+                    </div>
+
+
+                    <div class="col-12 my-3">
+                        <button class="btn btn-outline-primary simplex_start">Решить симплекс методом</button>
+                    </div>
+
+                    <div class="col-12 my-3">
+                        <table class="table text-center table-hover the  table-bordered simplex_table">
+                            <thead class="bg-dark text-white">
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class="log">
+
+                        </div>
+                    </div>
+
+
+                    <!--<button class="btn btn-block btn-primary start">Рассчитать</button>-->
+                </form>
+
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+
+        </div>
+    </div>
+
+</section>
+
+
+<script src="lib/jquery/jquery-3.3.1.min.js"></script>
+<script src="lib/bootstrap/bootstrap.min.js"></script>
+<script src="hepler.js"></script>
+<script src="simplex.js"></script>
+</body>
+
+</html>
