@@ -23,6 +23,7 @@ $(document).ready(function () {
         setup();
         const linear_reg = new Linear(x, y);
         linear_reg.show();
+        console.log(linear_reg.Mb, linear_reg.Ma, linear_reg.Mrxy);
     });
 
     $stepen_model_btn.on('click', function (e) {
@@ -43,6 +44,7 @@ $(document).ready(function () {
         e.preventDefault();
         setup();
         const giper_reg = new Giper(x, y);
+
 
         giper_reg.show();
     });
@@ -127,6 +129,15 @@ class Linear extends ecoFuntion {
         return ecoFuntion.average(this.x_pow_2);
     }
 
+    get x_pow_2_sum() {
+        let sum = 0;
+
+        for (let i = 0; i < this.x.length; i++) {
+            sum += this.x_pow_2[i];
+        }
+        return sum;
+    }
+
     get y_pow_2_average() {
         return ecoFuntion.average(this.y_pow_2);
     }
@@ -164,6 +175,15 @@ class Linear extends ecoFuntion {
 
     get y__dif__y_teor___pow_2__average() {
         return ecoFuntion.average(this.y__dif__y_teor___pow_2);
+    }
+
+    get y__dif__y_teor___pow_2__sum() {
+        let sum = 0;
+
+        for (let i = 0; i < this.x.length; i++) {
+            sum += this.y__dif__y_teor___pow_2[i];
+        }
+        return sum;
     }
 
     get x_gamma_pow_2() {
@@ -215,6 +235,49 @@ class Linear extends ecoFuntion {
         return this.r_xy_pow_2 / (1 - this.r_xy_pow_2) * (this.n - 2);
     }
 
+    /**
+     * @return {number}
+     */
+    get Sost() {
+        return Math.sqrt(this.y__dif__y_teor___pow_2__sum / (this.x.length - 2));
+    }
+
+    /**
+     * @return {number}
+     */
+    get Mb() {
+        return this.Sost / (this.x_gamma * Math.sqrt(this.x.length));
+    }
+
+    /**
+     * @return {number}
+     */
+    get Ma() {
+        console.log(this.Sost, this.x_pow_2_sum, this.x.length, this.x_gamma);
+        return this.Sost * (Math.sqrt(this.x_pow_2_sum) / (this.x.length * this.x_gamma));
+
+    }
+
+    /**
+     * @return {number}
+     */
+    get Mrxy() {
+        return Math.sqrt((1 - this.r_xy_pow_2) / (this.x.length - 2));
+    }
+
+
+    get tb() {
+        return this.b / this.Mb;
+    }
+
+    get ta() {
+        return this.a / this.Ma;
+    }
+
+    get tr() {
+        return this.r_xy / this.Mrxy;
+    }
+
 
     show() {
         const $table = $('.table');
@@ -227,7 +290,13 @@ class Linear extends ecoFuntion {
         const $A_average = $table.find('.var_A_average');
         const $F_fact = $table.find('.var_F_fact');
         const $p_xy = $table.find('.var_p_xy');
+        const $Mb = $table.find('.var_Mb');
+        const $Ma = $table.find('.var_Ma');
+        const $Mr = $table.find('.var_Mr');
 
+        const $tb = $table.find('.var_tb');
+        const $ta = $table.find('.var_ta');
+        const $tr = $table.find('.var_tr');
         $b.html(this.b);
         $a.html(this.a);
         $regres_function.html(this.getFunctionStr);
@@ -237,12 +306,18 @@ class Linear extends ecoFuntion {
         $A_average.html(this.A_average);
         $F_fact.html(this.F_fact);
         $p_xy.html(this.p_xy);
+        $Mb.html(this.Mb);
+        $Ma.html(this.Ma);
+        $Mr.html(this.Mrxy);
+        $tb.html(this.tb);
+        $ta.html(this.ta);
+        $tr.html(this.tr);
+
         grafik(this.x, this.y_teor);
     }
 
 
-    get getFunctionStr()
-    {
+    get getFunctionStr() {
         return this.a + " + " + this.b + " * x";
     }
 
@@ -355,9 +430,8 @@ class Stepen extends Linear {
     }
 
 
-    get getFunctionStr()
-    {
-        return "10 ^ (" + this.a + ") * x ^ (" +this.b + ")";
+    get getFunctionStr() {
+        return "10 ^ (" + this.a + ") * x ^ (" + this.b + ")";
     }
 }
 
@@ -436,9 +510,8 @@ class Pokaz extends Linear {
         return this.b * (this.x_gamma / this.Y_gamma);
     }
 
-    get getFunctionStr()
-    {
-        return "10 ^ (" + this.a + ") * 10 ^(" +this.b + " * x)";
+    get getFunctionStr() {
+        return "10 ^ (" + this.a + ") * 10 ^(" + this.b + " * x)";
     }
 }
 
@@ -538,9 +611,8 @@ class Giper extends Linear {
     }
 
 
-    get getFunctionStr()
-    {
-        return  this.a + " + " + this.b + " * 1 / x";
+    get getFunctionStr() {
+        return this.a + " + " + this.b + " * 1 / x";
     }
 
 }
