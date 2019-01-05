@@ -61,6 +61,8 @@
                         <div class="col-12">
                             <button class="btn btn-info linear_model_btn">Линейная функция</button>
                             <button class="btn btn-warning stepen_model_btn">Степенная функция</button>
+                            <button class="btn btn-primary pokaz_model_btn">Показательная функция</button>
+                            <button class="btn btn-primary giper_model_btn">Гиперболическая функция</button>
                         </div>
                     </div>
 
@@ -70,8 +72,12 @@
             </div>
         </div>
 
+        <div class="row my-3">
+            <div class="grafik" id="grafik"></div>
 
-        <div class="row mt-3">
+        </div>
+
+        <div class="row my-3">
 
 
             <table class="table table-bordered">
@@ -147,9 +153,8 @@
                 </tbody>
 
             </table>
-
-
         </div>
+
     </div>
 
 </section>
@@ -157,6 +162,14 @@
 
 <script src="lib/jquery/jquery-3.3.1.min.js"></script>
 <script src="lib/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+
+
 <script src="script.js"></script>
 <script src="hepler.js"></script>
 </body>
