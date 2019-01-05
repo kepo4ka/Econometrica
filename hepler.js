@@ -78,3 +78,88 @@ function getData($input) {
     }
     return array;
 }
+
+
+
+// Функции сортировки
+function sortX(i, ii) { // По x (возрастание)
+    if (i[0] > ii[0])
+        return 1;
+    else if (i[0] < ii[0])
+        return -1;
+    else
+        return 0;
+}
+
+function grafik(x, y, y_teor) {
+
+
+    let coor1 = [];
+
+
+    for (let i = 0; i < x.length; i++) {
+        let temp = [];
+
+        temp[0] = x[i];
+        temp[1] = y[i];
+        coor1.push(temp);
+    }
+    coor1.sort(sortX);
+
+  
+
+    Highcharts.chart('grafik', {
+
+        title: {
+            text: 'Теоритические значения'
+        },
+
+
+        legend: {
+            enabled:false,
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Y'
+            }
+        },
+        xAxis: {
+            title: {
+                text: 'X'
+            }
+        },
+
+        tooltip: {
+            headerFormat: '',
+            pointFormat: 'x = {point.x}, y = {point.y}'
+        },
+
+        series: [
+            {
+                name: "Y",
+                data: coor1
+
+            }
+
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 1200
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+}
