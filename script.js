@@ -5,7 +5,11 @@ $(document).ready(function () {
     // const $start = $('.start');
     const $stepen_model_btn = $('.stepen_model_btn');
     const $linear_model_btn = $('.linear_model_btn');
+    const $pokaz_model_btn = $('.pokaz_model_btn');
+    const $giper_model_btn = $('.giper_model_btn');
+
     const $table = $('.table');
+
     let x = [];
     let y = [];
     let setted = false;
@@ -26,6 +30,21 @@ $(document).ready(function () {
         setup();
         const stepen_reg = new Stepen(x, y);
         stepen_reg.show();
+    });
+
+    $pokaz_model_btn.on('click', function (e) {
+        e.preventDefault();
+        setup();
+        const pokaz_reg = new Pokaz(x, y);
+        pokaz_reg.show();
+    });
+
+    $giper_model_btn.on('click', function (e) {
+        e.preventDefault();
+        setup();
+        const giper_reg = new Giper(x, y);
+
+        giper_reg.show();
     });
 
 
@@ -211,13 +230,20 @@ class Linear extends ecoFuntion {
 
         $b.html(this.b);
         $a.html(this.a);
-        $regres_function.html(this.a + " + " + this.b + " * x");
+        $regres_function.html(this.getFunctionStr);
         $r_xy.html(this.r_xy);
         $r_xy_pow_2.html(this.r_xy_pow_2);
         $cheddoka.html(get_cheddoka(this.r_xy));
         $A_average.html(this.A_average);
         $F_fact.html(this.F_fact);
         $p_xy.html(this.p_xy);
+        grafik(this.x, this.y_teor);
+    }
+
+
+    get getFunctionStr()
+    {
+        return this.a + " + " + this.b + " * x";
     }
 
 }
@@ -328,27 +354,193 @@ class Stepen extends Linear {
         return this.b * (this.X_gamma / this.Y_gamma);
     }
 
-    show() {
-        const $table = $('.table');
-        const $b = $table.find('.var_b');
-        const $a = $table.find('.var_a');
-        const $regres_function = $table.find('.var_regres_function');
-        const $r_xy = $table.find('.var_r_xy');
-        const $r_xy_pow_2 = $table.find('.var_r_xy_pow_2');
-        const $cheddoka = $table.find('.var_cheddoka');
-        const $A_average = $table.find('.var_A_average');
-        const $F_fact = $table.find('.var_F_fact');
-        const $p_xy = $table.find('.var_p_xy');
 
-        $b.html(this.b);
-        $a.html(this.a);
-        $regres_function.html("10 ^ (" + this.a + ") * x ^ (" + this.b + ")");
-        $r_xy.html(this.r_xy);
-        $r_xy_pow_2.html(this.r_xy_pow_2);
-        $cheddoka.html(get_cheddoka(this.r_xy));
-        $A_average.html(this.A_average);
-        $F_fact.html(this.F_fact);
-        $p_xy.html(this.p_xy);
+    get getFunctionStr()
+    {
+        return "10 ^ (" + this.a + ") * x ^ (" +this.b + ")";
+    }
+}
+
+
+class Pokaz extends Linear {
+    constructor(x, y) {
+        super(x, y);
+    }
+
+    get Y() {
+        let new_array = [];
+        for (let i = 0; i < this.n; i++) {
+            new_array.push(Math.log10(this.y[i]));
+        }
+        return new_array;
+    }
+
+
+    get xY() {
+        return ecoFuntion.multiple(this.x, this.Y);
+    }
+
+    get xY_average() {
+        return ecoFuntion.average(this.xY);
+    }
+
+
+    get Y_pow_2() {
+        return ecoFuntion.pow_2(this.Y);
+    }
+
+
+    get Y_average() {
+        return ecoFuntion.average(this.Y);
+    }
+
+    get Y_pow_2_average() {
+        return ecoFuntion.average(this.Y_pow_2);
+    }
+
+    get b() {
+        return (this.xY_average - this.Y_average * this.x_average) / (this.x_pow_2_average - this.x_average * this.x_average);
+    }
+
+    get a() {
+        return this.Y_average - this.b * this.x_average;
+    }
+
+
+    get y_teor() {
+        let array = [];
+        for (let i = 0; i < this.n; i++) {
+            let res = Math.pow(10, this.a) * Math.pow(10, (this.b * this.x[i]));
+            array.push(res);
+        }
+        return array;
+    }
+
+
+    /**
+     * @return {number}
+     */
+    get Y_gamma_pow_2() {
+        return this.Y_pow_2_average - this.Y_average * this.Y_average;
+    }
+
+
+    /**
+     * @return {number}
+     */
+    get Y_gamma() {
+        return Math.sqrt(this.Y_gamma_pow_2);
+    }
+
+    get r_xy() {
+        return this.b * (this.x_gamma / this.Y_gamma);
+    }
+
+    get getFunctionStr()
+    {
+        return "10 ^ (" + this.a + ") * 10 ^(" +this.b + " * x)";
+    }
+}
+
+
+class Giper extends Linear {
+    constructor(x, y) {
+        super(x, y);
+    }
+
+    get z() {
+        let array = [];
+
+        for (let i = 0; i < this.x.length; i++) {
+            array.push((1 / this.x[i]));
+        }
+
+        return array;
+    }
+
+
+    get zy() {
+
+        return ecoFuntion.multiple(this.z, this.y);
+    }
+
+    get zy_average() {
+        return ecoFuntion.average(this.zy);
+    }
+
+    get z_pow_2() {
+        return ecoFuntion.pow_2(this.z);
+    }
+
+    get z_average() {
+        return ecoFuntion.average(this.z);
+    }
+
+    get z_pow_2_average() {
+        return ecoFuntion.average(this.z_pow_2);
+    }
+
+    get a() {
+        return this.y_average - this.b * this.z_average;
+    }
+
+    get b() {
+        return (this.zy_average - this.y_average * this.z_average) / (this.z_pow_2_average - this.z_average * this.z_average);
+    }
+
+
+    get y_teor() {
+        let array = [];
+        for (let i = 0; i < this.n; i++) {
+            let res = this.a + this.b * 1 / this.x[i];
+            array.push(res);
+        }
+        return array;
+    }
+
+    get y__dif__y_teor() {
+        let array = [];
+        for (let i = 0; i < this.n; i++) {
+            let res = this.y[i] - this.y_teor[i];
+            array.push(res);
+        }
+        return array;
+    }
+
+    get y__dif__y_teor___pow_2() {
+        return ecoFuntion.pow_2(this.y__dif__y_teor);
+    }
+
+    get y__dif__y_teor___pow_2__average() {
+        return ecoFuntion.average(this.y__dif__y_teor___pow_2);
+    }
+
+    get z_gamma_pow_2() {
+        return this.z_pow_2_average - this.z_average * this.z_average;
+    }
+
+    get z_gamma() {
+        return Math.sqrt(this.z_gamma_pow_2);
+    }
+
+    get r_xy() {
+        return this.b * (this.z_gamma / this.y_gamma);
+    }
+
+    get A() {
+        let array = [];
+
+        for (let i = 0; i < this.n; i++) {
+            let res = Math.abs(this.y__dif__y_teor[i] / this.y[i]) * 100;
+            array.push(res);
+        }
+        return array;
+    }
+
+
+    get getFunctionStr()
+    {
+        return  this.a + " + " + this.b + " * 1 / x";
     }
 
 }
