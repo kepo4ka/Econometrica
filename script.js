@@ -650,15 +650,19 @@ function loadStudent() {
             let first = split[0].split(' ');
             console.log(first);
 
-            student['0-05'] = first[1];
-            student['0-01'] = first[2];
-            student['0-001'] = first[3];
+            for (let i=0;i< first.length-1;i++)
+            {
+                student.push ({
+                    type: parseFloat(first[i+1]),
+                    values: []
+                })
+            }
 
             for (let i = 1; i < split.length; i++) {
                 let line = split[i].trim().split(' ');
-                student['0-05'] = line[1];
-                student['0-01'] = line[2];
-                student['0-001'] = line[3];
+                student[0].values.push(line[1]);
+                student[1].values.push(line[2]);
+                student[2].values.push(line[3]);
             }
 
             console.log(student);
