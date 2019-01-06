@@ -641,7 +641,6 @@ function loadStudent() {
 
             data = data.trim();
 
-           
 
             let split = data.split('\n');
 
@@ -650,14 +649,21 @@ function loadStudent() {
             let first = split[0].split(' ');
             console.log(first);
 
-            for (let i=0;i< first.length-1;i++)
-            {
-                student.push ({
-                    type: parseFloat(first[i+1]),
-                    values: []
-                })
-            }
-            console.log(student);
+
+            student.push({
+                type: 0.05,
+                values: []
+            });
+            student.push({
+                type: 0.01,
+                values: []
+            });
+            student.push({
+                type: 0.001,
+                values: []
+            });
+
+           
 
             for (let i = 1; i < split.length; i++) {
                 let line = split[i].trim().split(' ');
