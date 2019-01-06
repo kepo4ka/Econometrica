@@ -88,6 +88,7 @@ $(document).ready(function () {
             $head.append("<td>X" + (j + 1) + "</td>");
         }
         $head.append("<td>Свободный элемент</td>");
+        $head.append("<td>Отношения</td>");
         $table.find('thead').append($head);
 
         let $tbody = $table.find('tbody');
@@ -126,6 +127,8 @@ $(document).ready(function () {
                     $row.append("<td>" + pData.simplex[i][j] + "</td>");
                 }
             }
+            $row.append("<td class='text-warning font-weight-bold'>" + pData.relations[i] + "</td>");
+
             $tbody.append($row);
         }
 
