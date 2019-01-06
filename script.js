@@ -639,7 +639,25 @@ function loadStudent() {
 
             let student = [];
 
-            
+            data = data.trim();
+
+
+            let split = data.split('\n');
+
+            let first = split[0].split[' '];
+
+            student['0-05'] = first[1];
+            student['0-01'] = first[2];
+            student['0-001'] = first[3];
+
+            for (let i = 1; i < split.length; i++) {
+                let line = split[i].trim().split(' ');
+                student['0-05'] = line[1];
+                student['0-01'] = line[2];
+                student['0-001'] = line[3];
+            }
+
+            console.log(student);
 
 
         }
