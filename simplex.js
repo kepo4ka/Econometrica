@@ -4,21 +4,29 @@ $(document).ready(function () {
     const $log = $('.log');
     const $simplex_start = $('.simplex_start');
     const $simplex_table = $('.simplex_table').clone();
+    const $extremum = $('#extremum');
 
 
     let f_function = [];
     let matrix = [];
     let data = [];
 
+    $('.nice-select').niceSelect();
 
     $simplex_start.on('click', function (e) {
         e.preventDefault();
 
-        simplex();
+        let extr_type = $extremum.val();
+
+        if (extr_type == 'min') {
+            alert('Не знаю как решать задачи на минимум :(');
+            return false;
+        }
+        simplex($extremum.val());
     });
 
 
-    function simplex() {
+    function simplex(type) {
         $log.html("");
 
         let t = '';
@@ -28,6 +36,15 @@ $(document).ready(function () {
         if (!data) {
             alert('Не удалось распознать Условие задачи. Возможна ошибка при вводе');
         }
+
+        // if (type == 'min') {
+        //     for (let i = 0; i < data.f.length; i++) {
+        //         if (data.f[i] !== 0) {
+        //             data.f[i] *= (-1);
+        //         }
+        //     }
+        // }
+
 
         data.bazis = getFirstBazis(data);
         data.simplex = getSimplexTable(data);
