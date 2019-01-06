@@ -18,6 +18,8 @@ $(document).ready(function () {
     let sum = {};
     let calc = {};
 
+    $.ajax({ url: 'student_critical.txt', success: function(data) { alert(data); } });
+
     $linear_model_btn.on('click', function (e) {
         e.preventDefault();
         setup();
