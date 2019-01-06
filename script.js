@@ -18,10 +18,11 @@ $(document).ready(function () {
     let sum = {};
     let calc = {};
 
-    $.ajax({ url: 'student_critical.txt', success: function(data) { alert(data); } });
+    loadStudent();
 
     $linear_model_btn.on('click', function (e) {
         e.preventDefault();
+
         setup();
         const linear_reg = new Linear(x, y);
         linear_reg.show();
@@ -30,6 +31,7 @@ $(document).ready(function () {
 
     $stepen_model_btn.on('click', function (e) {
         e.preventDefault();
+
         setup();
         const stepen_reg = new Stepen(x, y);
         stepen_reg.show();
@@ -37,6 +39,7 @@ $(document).ready(function () {
 
     $pokaz_model_btn.on('click', function (e) {
         e.preventDefault();
+
         setup();
         const pokaz_reg = new Pokaz(x, y);
         pokaz_reg.show();
@@ -44,6 +47,7 @@ $(document).ready(function () {
 
     $giper_model_btn.on('click', function (e) {
         e.preventDefault();
+
         setup();
         const giper_reg = new Giper(x, y);
 
@@ -616,5 +620,29 @@ class Giper extends Linear {
     get getFunctionStr() {
         return this.a + " + " + this.b + " * 1 / x";
     }
+
+}
+
+
+function loadStudent() {
+    $('.work_button').attr('disabled', true);
+
+    $.ajax({
+        url: 'student_critical.txt', success: function (data) {
+
+            if (!data) {
+                alert('Ошибка загрузки Стьюдента. Перезагрузите страницу');
+                return false;
+            }
+
+            $('.work_button').attr('disabled', false);
+
+            let student = [];
+
+            
+
+
+        }
+    });
 
 }

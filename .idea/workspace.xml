@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdbecd8a-06ba-4094-bb23-04f19eab6f98" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script.js" afterPath="$PROJECT_DIR$/script.js" />
     </list>
     <ignored path="econom.iws" />
@@ -36,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simplex.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/simplex.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state relative-caret-position="654">
+              <caret line="88" column="67" selection-start-line="88" selection-start-column="56" selection-end-line="88" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -49,10 +50,15 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+            <state relative-caret-position="721">
+              <caret line="641" column="12" selection-start-line="641" selection-start-column="12" selection-end-line="641" selection-end-column="12" />
               <folding>
-                <element signature="e#3341#3432#0" expanded="false" />
+                <element signature="n#ecoFuntion#0" expanded="false" />
+                <element signature="n#Linear#0" expanded="false" />
+                <element signature="e#3277#3368#0" expanded="false" />
+                <element signature="n#Stepen#0" expanded="false" />
+                <element signature="n#Pokaz#0" expanded="false" />
+                <element signature="n#Giper#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -68,9 +74,9 @@
       <list>
         <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/hepler.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/simplex.html" />
         <option value="$PROJECT_DIR$/simplex.js" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/script.js" />
       </list>
     </option>
@@ -197,12 +203,12 @@
       <workItem from="1546523436233" duration="22882000" />
       <workItem from="1546610872693" duration="39000" />
       <workItem from="1546691715391" duration="10860000" />
-      <workItem from="1546784014059" duration="8484000" />
+      <workItem from="1546784014059" duration="8906000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59471000" />
+    <option name="totallyTimeSpent" value="59893000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -240,7 +246,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -276,7 +284,12 @@
         <state relative-caret-position="4522">
           <caret line="269" column="31" selection-start-line="269" selection-start-column="31" selection-end-line="269" selection-end-column="31" />
           <folding>
-            <element signature="e#3341#3432#0" expanded="false" />
+            <element signature="n#ecoFuntion#0" expanded="false" />
+            <element signature="n#Linear#0" expanded="false" />
+            <element signature="e#3277#3368#0" expanded="false" />
+            <element signature="n#Stepen#0" expanded="false" />
+            <element signature="n#Pokaz#0" expanded="false" />
+            <element signature="n#Giper#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -351,7 +364,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3341#3432#0" expanded="false" />
+            <element signature="n#ecoFuntion#0" expanded="false" />
+            <element signature="n#Linear#0" expanded="false" />
+            <element signature="e#3277#3368#0" expanded="false" />
+            <element signature="n#Stepen#0" expanded="false" />
+            <element signature="n#Pokaz#0" expanded="false" />
+            <element signature="n#Giper#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -379,7 +397,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3341#3432#0" expanded="false" />
+            <element signature="n#ecoFuntion#0" expanded="false" />
+            <element signature="n#Linear#0" expanded="false" />
+            <element signature="e#3277#3368#0" expanded="false" />
+            <element signature="n#Stepen#0" expanded="false" />
+            <element signature="n#Pokaz#0" expanded="false" />
+            <element signature="n#Giper#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -407,7 +430,12 @@
         <state relative-caret-position="578">
           <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
           <folding>
-            <element signature="e#3341#3432#0" expanded="false" />
+            <element signature="n#ecoFuntion#0" expanded="false" />
+            <element signature="n#Linear#0" expanded="false" />
+            <element signature="e#3277#3368#0" expanded="false" />
+            <element signature="n#Stepen#0" expanded="false" />
+            <element signature="n#Pokaz#0" expanded="false" />
+            <element signature="n#Giper#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -427,14 +455,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hepler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="740">
@@ -443,6 +463,14 @@
             <element signature="n#!!block;n#getArraySum#0" expanded="false" />
             <element signature="n#!!block;n#mround#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simplex.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -456,20 +484,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simplex.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="654">
+          <caret line="88" column="67" selection-start-line="88" selection-start-column="56" selection-end-line="88" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+        <state relative-caret-position="721">
+          <caret line="641" column="12" selection-start-line="641" selection-start-column="12" selection-end-line="641" selection-end-column="12" />
           <folding>
-            <element signature="e#3341#3432#0" expanded="false" />
+            <element signature="n#ecoFuntion#0" expanded="false" />
+            <element signature="n#Linear#0" expanded="false" />
+            <element signature="e#3277#3368#0" expanded="false" />
+            <element signature="n#Stepen#0" expanded="false" />
+            <element signature="n#Pokaz#0" expanded="false" />
+            <element signature="n#Giper#0" expanded="false" />
           </folding>
         </state>
       </provider>
