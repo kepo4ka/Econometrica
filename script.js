@@ -651,7 +651,7 @@ function loadStudent() {
 
 
             student.push({
-                type: "0.05",
+                type: 0.05,
                 values: []
             });
             student.push({
