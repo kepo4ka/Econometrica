@@ -6,6 +6,7 @@
     <title>Симплекс метод</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/jquery-nice-select-1.1.0/css/nice-select.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -28,7 +29,18 @@
         <div class="row">
             <div class="col-12">
 
-                <form class="row" action="">
+                <form class="row " action="">
+
+                    <div class="col-12 my-3">
+                        <div class="form-group">
+                            <label class="d-block" for="extremum">Тип экстремума</label>
+                            <select class="nice-select" name="extremum" id="extremum">
+                                <option value="max">Max</option>
+                                <option value="min">Min</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-12">
                             <textarea class="col-12" name="canonMatrix" id="canonMatrix"
                                       placeholder="Коэфициенты уравнений канонического вида. В первой строке сама функция. Далее матрица ограничений"
@@ -88,6 +100,8 @@
 
 <script src="lib/jquery/jquery-3.3.1.min.js"></script>
 <script src="lib/bootstrap/bootstrap.min.js"></script>
+<script src="lib/jquery-nice-select-1.1.0/js/jquery.nice-select.min.js"></script>
+
 <script src="hepler.js"></script>
 <script src="simplex.js"></script>
 </body>
