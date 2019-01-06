@@ -23,24 +23,26 @@ $(document).ready(function () {
 
 
         data = getMatrix($matrix_input);
+
         if (!data) {
             alert('Не удалось распознать Условие задачи. Возможна ошибка при вводе');
         }
 
-
         data.bazis = getFirstBazis(data);
         data.simplex = getSimplexTable(data);
+
         let lead = getLeadElem(data);
         data.lead = {i: lead.i, j: lead.j};
         data.relations = lead.relations;
 
         showTable(data, 1);
 
-        let new_simplex = newSimplexTable(data);
 
+        let new_simplex = newSimplexTable(data);
         data.simplex = new_simplex.simplex;
         data.f = new_simplex.f;
-        showTable(data, 2);
+        showTable(data, 2,  checkEnd(data));
+
 
         let step = 3;
 
@@ -53,7 +55,9 @@ $(document).ready(function () {
             new_simplex = newSimplexTable(data, true);
             data.simplex = new_simplex.simplex;
             data.f = new_simplex.f;
-            showTable(data, step++);
+
+            showTable(data, step++, checkEnd(data));
+
         }
 
 
@@ -72,7 +76,7 @@ $(document).ready(function () {
 
     }
 
-    function showTable(pData, pStep) {
+    function showTable(pData, pStep, ilast) {
         const $table = $simplex_table.clone();
         let rows = pData.m + 2;
         let columns = pData.m + 2;
@@ -88,10 +92,26 @@ $(document).ready(function () {
 
         let $tbody = $table.find('tbody');
 
+
+        pData.bazis.push(pData.lead.j);
+
+
         for (let i = 0; i < pData.m - 1; i++) {
             if (!pData.bazis.includes(i)) {
                 continue;
             }
+
+            let it_null = true;
+            for (let j = 0; j < pData.m; j++) {
+                if (pData.simplex[i][j] !== 0) {
+                    it_null = false;
+                    break;
+                }
+            }
+            if (it_null) {
+                continue;
+            }
+
             let row = document.createElement("tr");
             let $row = $(row);
 
@@ -99,7 +119,7 @@ $(document).ready(function () {
 
             for (let j = 0; j < pData.m; j++) {
                 let new_lead = getLeadElem(data);
-                if (i == new_lead.i && j == new_lead.j) {
+                if (i == new_lead.i && j == new_lead.j && !ilast) {
                     $row.append("<td class='bg-success font-weight-bold text-white'>" + pData.simplex[i][j] + "</td>");
                 }
                 else {
@@ -216,15 +236,19 @@ $(document).ready(function () {
             }
         }
 
+
         if (index < 0) {
             return false;
         }
 
         for (let i = 0; i < data.m - 1; i++) {
             let value = NaN;
+
             if (data.simplex[i][data.m - 1] > 0 && data.simplex[i][index] > 0) {
+
                 value = data.simplex[i][data.m - 1] / data.simplex[i][index];
             }
+
             if (!isFinite(value)) {
                 relations_array.push(NaN);
             }
