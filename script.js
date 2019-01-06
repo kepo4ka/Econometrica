@@ -651,7 +651,7 @@ function loadStudent() {
 
 
             student.push({
-                type: 0.05,
+                type: "0.05",
                 values: []
             });
             student.push({
@@ -663,7 +663,7 @@ function loadStudent() {
                 values: []
             });
 
-           
+
 
             for (let i = 1; i < split.length; i++) {
                 let line = split[i].trim().split(' ');
