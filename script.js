@@ -641,7 +641,7 @@ function loadStudent() {
 
             data = data.trim();
 
-            console.log(data);
+           
 
             let split = data.split('\n');
 
@@ -657,6 +657,7 @@ function loadStudent() {
                     values: []
                 })
             }
+            console.log(student);
 
             for (let i = 1; i < split.length; i++) {
                 let line = split[i].trim().split(' ');
