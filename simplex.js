@@ -21,6 +21,7 @@ $(document).ready(function () {
     function simplex() {
         $log.html("");
 
+        let t = '';
 
         data = getMatrix($matrix_input);
 
@@ -34,14 +35,15 @@ $(document).ready(function () {
         let lead = getLeadElem(data);
         data.lead = {i: lead.i, j: lead.j};
         data.relations = lead.relations;
-
         showTable(data, 1);
 
+        t += JSON.stringify(data) + "\n";
 
         let new_simplex = newSimplexTable(data);
         data.simplex = new_simplex.simplex;
         data.f = new_simplex.f;
-        showTable(data, 2,  checkEnd(data));
+        showTable(data, 2, checkEnd(data));
+        t += JSON.stringify(data) + "\n";
 
 
         let step = 3;
@@ -55,10 +57,11 @@ $(document).ready(function () {
             new_simplex = newSimplexTable(data, true);
             data.simplex = new_simplex.simplex;
             data.f = new_simplex.f;
-
+            t += JSON.stringify(data) + "\n";
             showTable(data, step++, checkEnd(data));
 
         }
+        console.log(t);
 
 
         $log.append("<hr>");
@@ -93,12 +96,17 @@ $(document).ready(function () {
 
         let $tbody = $table.find('tbody');
 
+        let bazic = [];
 
-        pData.bazis.push(pData.lead.j);
 
+        for (let i = 0; i < pData.bazis.length; i++) {
+            bazic.push(pData.bazis[i]);
+        }
+
+        bazic.push(pData.lead.j);
 
         for (let i = 0; i < pData.m - 1; i++) {
-            if (!pData.bazis.includes(i)) {
+            if (!bazic.includes(i)) {
                 continue;
             }
 
@@ -117,9 +125,10 @@ $(document).ready(function () {
             let $row = $(row);
 
             $row.append("<td>X" + (i + 1) + "</td>");
+            let new_lead = getLeadElem(data);
 
             for (let j = 0; j < pData.m; j++) {
-                let new_lead = getLeadElem(data);
+
                 if (i == new_lead.i && j == new_lead.j && !ilast) {
                     $row.append("<td class='bg-success font-weight-bold text-white'>" + pData.simplex[i][j] + "</td>");
                 }
@@ -127,7 +136,9 @@ $(document).ready(function () {
                     $row.append("<td>" + pData.simplex[i][j] + "</td>");
                 }
             }
-            $row.append("<td class='text-warning font-weight-bold'>" + pData.relations[i] + "</td>");
+            if (!ilast) {
+                $row.append("<td class='text-warning font-weight-bold'>" + new_lead.relations[i] + "</td>");
+            }
 
             $tbody.append($row);
         }
