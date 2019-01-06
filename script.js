@@ -641,10 +641,14 @@ function loadStudent() {
 
             data = data.trim();
 
+            console.log(data);
 
             let split = data.split('\n');
 
-            let first = split[0].split[' '];
+            console.log(split);
+
+            let first = split[0].split(' ');
+            console.log(first);
 
             student['0-05'] = first[1];
             student['0-01'] = first[2];

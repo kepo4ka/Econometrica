@@ -49,8 +49,8 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="721">
-              <caret line="659" column="33" selection-start-line="659" selection-start-column="33" selection-end-line="659" selection-end-column="33" />
+            <state relative-caret-position="568">
+              <caret line="650" column="31" selection-start-line="650" selection-start-column="12" selection-end-line="650" selection-end-column="31" />
               <folding>
                 <element signature="n#ecoFuntion#0" expanded="false" />
                 <element signature="n#Linear#0" expanded="false" />
@@ -202,12 +202,12 @@
       <workItem from="1546523436233" duration="22882000" />
       <workItem from="1546610872693" duration="39000" />
       <workItem from="1546691715391" duration="10860000" />
-      <workItem from="1546784014059" duration="9251000" />
+      <workItem from="1546784014059" duration="9311000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60238000" />
+    <option name="totallyTimeSpent" value="60298000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -493,8 +493,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="721">
-          <caret line="659" column="33" selection-start-line="659" selection-start-column="33" selection-end-line="659" selection-end-column="33" />
+        <state relative-caret-position="568">
+          <caret line="650" column="31" selection-start-line="650" selection-start-column="12" selection-end-line="650" selection-end-column="31" />
           <folding>
             <element signature="n#ecoFuntion#0" expanded="false" />
             <element signature="n#Linear#0" expanded="false" />
