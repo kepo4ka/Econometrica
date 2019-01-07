@@ -6,6 +6,7 @@
     <title>Эконометрика</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/jquery-nice-select-1.1.0/css/nice-select.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -29,8 +30,26 @@
             <div class="col-12">
 
                 <form class="row d-flex justify-content-center" action="">
-                    <div class="col-6">
 
+                    <div class="col-md-6 col-12">
+                        <label for="znach">Уровень значимости</label>
+                        <br>
+                        <select class="nice-select znach" name="znach" id="znach">
+                            <option value="0.05">0.05</option>
+                            <option value="0.01">0.01</option>
+                            <option value="0.001">0.001</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <label for="prognoz">Прогнозное значение Xp (%)</label>
+                        <input id="prognoz" type="text" class="prognoz form-control" placeholder="Прогнозное значение Xp" value="107">
+                    </div>
+
+                    <div class="col-12 my-3"></div>
+
+
+                    <div class="col-6">
+                        <label >Значения X</label>
                         <!--45,1-->
                         <!--59-->
                         <!--57,2-->
@@ -57,7 +76,7 @@
                     </textarea>
                     </div>
                     <div class="col-6">
-
+                        <label >Значения Y</label>
                         <!--68,8-->
                         <!--61,2-->
                         <!--59,9-->
@@ -199,6 +218,13 @@
 
                 <tr>
                     <td>
+                        Табличные значения t-статистики
+                    </td>
+                    <td class="var_student"></td>
+                </tr>
+
+                <tr>
+                    <td>
                         tb
                     </td>
                     <td class="var_tb"></td>
@@ -217,6 +243,13 @@
                     </td>
                     <td class="var_tr"></td>
                 </tr>
+                <tr>
+                    <td>
+                        tr
+                    </td>
+                    <td class="var_H0"></td>
+                </tr>
+
 
 
                 </tbody>
@@ -231,6 +264,7 @@
 
 <script src="lib/jquery/jquery-3.3.1.min.js"></script>
 <script src="lib/bootstrap/bootstrap.min.js"></script>
+<script src="lib/jquery-nice-select-1.1.0/js/jquery.nice-select.min.js"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
