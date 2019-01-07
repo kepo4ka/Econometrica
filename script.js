@@ -12,6 +12,7 @@ $(document).ready(function () {
     const $giper_model_btn = $('.giper_model_btn');
 
 
+
     let x = [];
     let y = [];
     let setted = false;
@@ -39,7 +40,7 @@ $(document).ready(function () {
         const linear_reg = new Linear(x, y);
         linear_reg.show();
 
-        console.log(linear_reg.M_Yp);
+        console.log(linear_reg.gamma_Yp_max, linear_reg.gamma_Yp_min);
 
     });
 
@@ -378,11 +379,11 @@ $(document).ready(function () {
         }
 
         get gamma_Yp_min() {
-            return this.Yp - this.M_Yp;
+            return this.Xp - this.delta_Yp;
         }
 
         get gamma_Yp_max() {
-            return this.Yp + this.M_Yp;
+            return this.Xp + this.delta_Yp;
         }
 
 
@@ -414,7 +415,22 @@ $(document).ready(function () {
 
             const $student = $('.var_student');
             const $H0 = $('.var_H0');
+            const $delta_a = $('.var_delta_a');
+            const $delta_b = $('.var_delta_b');
+            const $gamma_a = $('.var_gamma_a');
+            const $gamma_b = $('.var_gamma_b');
+            const $var_analiz_dov_interval = $('.var_analiz_dov_interval');
+            const $Xp = $('.var_Xp');
+            const $Yp = $('.var_Yp');
+            const $M_Yp = $('.var_M_Yp');
+            const $delta_Yp = $('.var_delta_M_Yp');
+            const $gamma_Yp = $('.var_gamma_Yp');
+            const $Dy = $('.var_Dy');
 
+            const $var = $('.var');
+
+            $var.html('');
+            
             $b.html(this.b);
             $a.html(this.a);
             $regres_function.html(this.getFunctionStr);
@@ -452,6 +468,40 @@ $(document).ready(function () {
             }
 
             $student.html(student);
+
+            if (this.check_H0) {
+                $H0.html('Гипотеза H0 отклоняется: a,b r_xy не случайно отличаются от нуля, а статистически значимы');
+                $gamma_a.html(this.a + " ± " + this.delta_a);
+                $gamma_b.html(this.b + " ± " + this.delta_b);
+
+                if (this.interval_a_zero) {
+                    $gamma_a.addClass('text-success');
+                }
+                if (this.interval_b_zero) {
+                    $gamma_b.addClass('text-success');
+                }
+
+                if (this.interval_zero) {
+                    $var_analiz_dov_interval.html('С вероятностью ' + (1 - znach) + " параметры a и b не принимают нулевых значений и не являются статистически незначимыми");
+
+                    $Xp.html(this.Xp);
+                    $Yp.html(this.Yp);
+                    $M_Yp.html(this.M_Yp);
+
+                    $delta_a.html(this.delta_a);
+                    $delta_b.html(this.delta_b);
+
+                    $delta_Yp.html(this.delta_Yp);
+                    $gamma_Yp.html(this.Xp + " ± " + this.delta_Yp);
+                    $Dy.html(this.Dy);
+                }
+                else {
+                    $var_analiz_dov_interval.html('С вероятностью ' + (1 - znach) + " параметры a и b принимают нулевые значения и являются статистически незначимыми");
+                }
+            }
+            else {
+                $H0.html('Гипотеза H0 принимается: a,b r_xy случайно отличаются от нуля и статистически НЕзначимы');
+            }
 
 
             grafik(this.x, this.y_teor);
