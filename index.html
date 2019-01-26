@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <title>Эконометрика</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="lib/jquery-nice-select-1.1.0/css/nice-select.css">
+
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -58,7 +62,7 @@
                         <!--58,8-->
                         <!--47,2-->
                         <!--55,2-->
-                            <textarea class="col-12" name="dataX" id="dataX" placeholder="X" cols="30" rows="10">
+                        <textarea class="col-12" name="dataX" id="dataX" placeholder="X" cols="30" rows="10">
 
 78
 82
@@ -85,7 +89,7 @@
                         <!--55-->
                         <!--54,3-->
                         <!--49,3-->
-                            <textarea class="col-12" name="dataY" id="dataY" placeholder="Y" cols="30" rows="10">
+                        <textarea class="col-12" name="dataY" id="dataY" placeholder="Y" cols="30" rows="10">
 
 133
 148
@@ -136,15 +140,16 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>
-                        Коэффициент b
+                    <td >
+
+                        Коэффициент b <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_1.png'>"></i>
                     </td>
                     <td class="var var_b"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        Коэффициент a
+                        Коэффициент a  <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_2.png'>"></i>
                     </td>
                     <td class="var var_a"></td>
                 </tr>
@@ -158,13 +163,21 @@
 
                 <tr>
                     <td>
-                        Линейный Коэффициент парной корреляции (Rxy)
+                        Линейный Коэффициент парной корреляции (Rxy)  <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_3.png'>"></i>
                     </td>
                     <td class="var var_r_xy"></td>
                 </tr>
+
                 <tr>
                     <td>
-                        Коэффициент детерминации (Rxy^2)
+                        Индекс корреляции Pxy  <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_4.png'>"></i>
+                    </td>
+                    <td class="var var_p_xy"></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Коэффициент детерминации (Rxy^2) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_8.png'>"></i>
                     </td>
                     <td class="var var_r_xy_pow_2"></td>
                 </tr>
@@ -177,25 +190,34 @@
                 </tr>
                 <tr>
                     <td>
-                        Средняя ошибка аппроксимации A
+                        Средняя ошибка аппроксимации A <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_6.png'>"></i>
                     </td>
                     <td class="var var_A_average"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        Индекс корреляции Pxy
+                        F-табл <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_10.png'>"></i>
                     </td>
-                    <td class="var var_p_xy"></td>
+                    <td class="var var_F_table"></td>
                 </tr>
 
 
                 <tr>
                     <td>
-                        F-критерий (Fфакт)
+                        F-критерий (Fфакт) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_9.png'><img src='images/Screenshot_11.png'>"></i>
                     </td>
                     <td class="var var_F_fact"></td>
                 </tr>
+
+                <tr>
+                    <td>
+                        Гипотеза H0 (F-критерий Фишера)
+                        <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_12.png'>"></i>
+                    </td>
+                    <td class="var var_H0_1"></td>
+                </tr>
+
 
                 <tr>
                     <td colspan="2"></td>
@@ -204,54 +226,54 @@
 
                 <tr>
                     <td>
-                        Случайная ошибка Mb
+                        Случайная ошибка Mb <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_16.png'><img src='images/Screenshot_17.png'>"></i>
                     </td>
                     <td class="var var_Mb"></td>
                 </tr>
                 <tr>
                     <td>
-                        Случайная ошибка Ma
+                        Случайная ошибка Ma <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_16.png'><img src='images/Screenshot_18.png'>"></i>
                     </td>
                     <td class="var var_Ma"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        Случайная ошибка Mr
+                        Случайная ошибка Mr <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_16.png'><img src='images/Screenshot_19.png'>"></i>
                     </td>
                     <td class="var var_Mr"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        Табличные значения t-статистики
+                        Табличное значение t-статистики Стьюдента
                     </td>
                     <td class="var var_student"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        tb
+                        tb <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_13.png'><img src='images/Screenshot_14.png'><img src='images/Screenshot_21.png'>"></i>
                     </td>
                     <td class="var var_tb"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        ta
+                        ta <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_13.png'><img src='images/Screenshot_14.png'>"></i>
                     </td>
                     <td class="var var_ta"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        tr
+                        tr <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_13.png'><img src='images/Screenshot_14.png'><img src='images/Screenshot_21.png'>"></i>
                     </td>
                     <td class="var var_tr"></td>
                 </tr>
                 <tr>
                     <td>
-                        Гипотеза H0
+                        Гипотеза H0 (t-статистика Стьюдента) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_15.png'><img src='images/Screenshot_20.png'>"></i>
                     </td>
                     <td class="var var_H0"></td>
                 </tr>
@@ -262,32 +284,32 @@
 
                 <tr>
                     <td>
-                        Предельная ошибка a (delta a)
+                        Предельная ошибка a (delta a) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_22.png'>"></i>
                     </td>
                     <td class="var var_delta_a"></td>
                 </tr>
                 <tr>
                     <td>
-                        Предельная ошибка b (delta b)
+                        Предельная ошибка b (delta b) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_22.png'>"></i>
                     </td>
                     <td class="var var_delta_b"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        Доверительный интервал a (gamma a)
+                        Доверительный интервал a (gamma a) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_23.png'>"></i>
                     </td>
                     <td class="var var_gamma_a"></td>
                 </tr>
                 <tr>
                     <td>
-                        Доверительный интервал b max (gamma b)
+                        Доверительный интервал b max (gamma b) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_24.png'>"></i>
                     </td>
                     <td class="var var_gamma_b"></td>
                 </tr>
                 <tr>
                     <td>
-                        Анализ доверительных интервалов
+                        Анализ доверительных интервалов <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_25.png'>"></i>
                     </td>
                     <td class="var var_analiz_dov_interval"></td>
                 </tr>
@@ -301,27 +323,27 @@
                 </tr>
                 <tr>
                     <td>
-                        Прогнозное значение (Yp)
+                        Прогнозное значение (Yp) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_26.png'>"></i>
                     </td>
                     <td class="var var_Yp"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        Ошибка прогноза (M_Yp)
+                        Средняя Стандартная Ошибка прогноза (M_Yp) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_27.png'><img src='images/Screenshot_28.png'>"></i>
                     </td>
                     <td class="var var_M_Yp"></td>
                 </tr>
 
                 <tr>
                     <td>
-                        Предельная ошибка прогноза (delta_M_Yp)
+                        Предельная ошибка прогноза (delta_M_Yp) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_29.png'>"></i>
                     </td>
                     <td class="var var_delta_M_Yp"></td>
                 </tr>
                 <tr>
                     <td>
-                        Доверительный интервал прогноза (gamma_Yp)
+                        Доверительный интервал прогноза (gamma_Yp) <i class="ml-2 fas fa-info-circle" data-toggle="tooltip" title="<img src='images/Screenshot_30.png'>"></i>
                     </td>
                     <td class="var var_gamma_Yp"></td>
                 </tr>
@@ -344,6 +366,8 @@
 
 
 <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+
+<script src="lib/popper/popper.min.js"></script>
 <script src="lib/bootstrap/bootstrap.min.js"></script>
 <script src="lib/jquery-nice-select-1.1.0/js/jquery.nice-select.min.js"></script>
 

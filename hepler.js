@@ -11,35 +11,39 @@ function arrayStrFormat(array) {
 function get_cheddoka(value) {
     let str = "Теснота связи - ";
 
-    if (value < 0.1) {
+    if (Math.abs(value) < 0.1) {
         str += "<strong class='text-danger'>";
         str += "Очень Слабая";
         str += "</strong>";
     }
-    else if (value < 0.3) {
+    else if (Math.abs(value) < 0.3) {
         str += "<strong class='text-secondary'>";
         str += "Слабая";
         str += "</strong>";
     }
-    else if (value < 0.5) {
+    else if (Math.abs(value) < 0.5) {
         str += "<strong class='text-info'>";
         str += "Умеренная";
         str += "</strong>";
     }
-    else if (value < 0.7) {
+    else if (Math.abs(value) < 0.7) {
         str += "<strong class='text-primary'>";
         str += "Заметная";
         str += "</strong>";
     }
-    else if (value < 0.9) {
+    else if (Math.abs(value) < 0.9) {
         str += "<strong class='text-success'>";
         str += "Высокая";
         str += "</strong>";
     }
-    else if (value >= 0.9) {
+    else if (Math.abs(value) >= 0.9) {
         str += "<strong class='text-warning'>";
         str += "Весьма Высокая";
         str += "</strong>";
+    }
+
+    if (value < 0) {
+        str += ", обратная";
     }
     return str;
 }
@@ -80,7 +84,6 @@ function getData($input) {
 }
 
 
-
 // Функции сортировки
 function sortX(i, ii) { // По x (возрастание)
     if (i[0] > ii[0])
@@ -106,7 +109,6 @@ function grafik(x, y, y_teor) {
     }
     coor1.sort(sortX);
 
-  
 
     Highcharts.chart('grafik', {
 
@@ -116,7 +118,7 @@ function grafik(x, y, y_teor) {
 
 
         legend: {
-            enabled:false,
+            enabled: false,
             align: 'right',
             verticalAlign: 'middle'
         },

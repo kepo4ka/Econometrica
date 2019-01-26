@@ -11,7 +11,16 @@ $(document).ready(function () {
     const $pokaz_model_btn = $('.pokaz_model_btn');
     const $giper_model_btn = $('.giper_model_btn');
 
+    $('[data-toggle="tooltip"]').tooltip({
+        animated: 'fade',
+        placement: 'top',
+        html: true
+    });
 
+    let customX = [];
+    for (let i = 0; i < 500; i++) {
+        customX.push(i);
+    }
 
     let x = [];
     let y = [];
@@ -19,18 +28,21 @@ $(document).ready(function () {
     let n = 0;
     let znach = parseFloat($znach.val());
     let prognoz = parseFloat($prognoz.val());
-    let student = [];
+    let student_array = [];
+    let phisher_array = [];
+    let student = 0;
+    let phisher = 0;
 
     let sum = {};
     let calc = {};
 
-    loadStudent();
+    loadCriticalValues();
 
     $('.nice-select').niceSelect();
 
     $znach.on('change', function () {
         znach = parseFloat($znach.val());
-        loadStudent();
+        loadCriticalValues();
     });
 
     $linear_model_btn.on('click', function (e) {
@@ -65,8 +77,6 @@ $(document).ready(function () {
 
         setup();
         const giper_reg = new Giper(x, y);
-
-
         giper_reg.show();
     });
 
@@ -75,7 +85,8 @@ $(document).ready(function () {
         x = getData($Xinput);
         y = getData($Yinput);
         n = x.length;
-        student = student[n - 3];
+        student = student_array[n - 3];
+        phisher = phisher_array[n - 2];
     }
 
     class ecoFuntion {
@@ -101,7 +112,7 @@ $(document).ready(function () {
             return array;
         }
 
-        static  multiple(arr1, arr2) {
+        static multiple(arr1, arr2) {
             let array = [];
             for (let i = 0; i < arr1.length; i++) {
                 let res = arr1[i] * arr2[i];
@@ -312,8 +323,13 @@ $(document).ready(function () {
             }
         }
 
-        get check_H0() {
+
+        get check_H0_student() {
             return this.tb.check && this.ta.check && this.tr.check;
+        }
+
+        get check_H0_phisher() {
+            return this.F_fact > phisher;
         }
 
         get delta_a() {
@@ -370,7 +386,7 @@ $(document).ready(function () {
          * @return {number}
          */
         get M_Yp() {
-            return this.Sost * Math.sqrt(1 + 1 / n + ((this.Xp - this.x_average) * (this.Xp - this.x_average) / ( n * this.x_gamma * this.x_gamma)));
+            return this.Sost * Math.sqrt(1 + 1 / n + ((this.Xp - this.x_average) * (this.Xp - this.x_average) / (n * this.x_gamma * this.x_gamma)));
         }
 
 
@@ -394,6 +410,15 @@ $(document).ready(function () {
             return this.gamma_Yp_max / this.gamma_Yp_min;
         }
 
+        y_teor_customX(p_x) {
+            let array = [];
+            for (let i = 0; i < p_x.length; i++) {
+                let res = this.a + this.b * p_x[i];
+                array.push(res);
+            }
+            return array;
+        }
+
         show() {
             const $table = $('.table');
             const $b = $table.find('.var_b');
@@ -404,6 +429,7 @@ $(document).ready(function () {
             const $cheddoka = $table.find('.var_cheddoka');
             const $A_average = $table.find('.var_A_average');
             const $F_fact = $table.find('.var_F_fact');
+            const $F_table = $table.find('.var_F_table');
             const $p_xy = $table.find('.var_p_xy');
             const $Mb = $table.find('.var_Mb');
             const $Ma = $table.find('.var_Ma');
@@ -415,6 +441,7 @@ $(document).ready(function () {
 
             const $student = $('.var_student');
             const $H0 = $('.var_H0');
+            const $H0_1 = $('.var_H0_1');
             const $delta_a = $('.var_delta_a');
             const $delta_b = $('.var_delta_b');
             const $gamma_a = $('.var_gamma_a');
@@ -430,7 +457,7 @@ $(document).ready(function () {
             const $var = $('.var');
 
             $var.html('');
-            
+
             $b.html(this.b);
             $a.html(this.a);
             $regres_function.html(this.getFunctionStr);
@@ -439,7 +466,18 @@ $(document).ready(function () {
             $cheddoka.html(get_cheddoka(this.r_xy));
             $A_average.html(this.A_average);
             $F_fact.html(this.F_fact);
+            $F_table.html(phisher);
             $p_xy.html(this.p_xy);
+
+
+            if (!this.check_H0_phisher) {
+                $H0_1.html('Гипотеза H0 принимается: выявленная зависимость имеет случайную природу, параметры уравнения и показателя тесноты статистически незначимы');
+                grafik(customX, this.y_teor_customX(customX));
+                return false;
+            }
+
+            $H0_1.html('Гипотеза H0 о статистической незначимости уравнения регресии и показателя тесноты Отклоняется.');
+
             $Mb.html(this.Mb);
             $Ma.html(this.Ma);
             $Mr.html(this.Mrxy);
@@ -469,7 +507,7 @@ $(document).ready(function () {
 
             $student.html(student);
 
-            if (this.check_H0) {
+            if (this.check_H0_student) {
                 $H0.html('Гипотеза H0 отклоняется: a,b r_xy не случайно отличаются от нуля, а статистически значимы');
                 $gamma_a.html(this.a + " ± " + this.delta_a);
                 $gamma_b.html(this.b + " ± " + this.delta_b);
@@ -504,7 +542,7 @@ $(document).ready(function () {
             }
 
 
-            grafik(this.x, this.y_teor);
+            grafik(customX, this.y_teor_customX(customX));
         }
 
 
@@ -577,11 +615,20 @@ $(document).ready(function () {
             return this.Y_average - this.b * this.X_average;
         }
 
-
         get y_teor() {
             let array = [];
             for (let i = 0; i < this.n; i++) {
                 let res = Math.pow(10, this.a) * Math.pow(this.x[i], this.b);
+                array.push(res);
+            }
+            return array;
+        }
+
+
+        y_teor_customX(p_x) {
+            let array = [];
+            for (let i = 0; i < p_x.length; i++) {
+                let res = Math.pow(10, this.a) * Math.pow(p_x[i], this.b);
                 array.push(res);
             }
             return array;
@@ -681,6 +728,15 @@ $(document).ready(function () {
             return array;
         }
 
+        y_teor_customX(p_x) {
+            let array = [];
+            for (let i = 0; i < p_x.length; i++) {
+                let res = Math.pow(10, this.a) * Math.pow(10, (this.b * p_x[i]));
+                array.push(res);
+            }
+            return array;
+        }
+
 
         /**
          * @return {number}
@@ -762,6 +818,17 @@ $(document).ready(function () {
             return array;
         }
 
+
+        y_teor_customX(p_x) {
+            let array = [];
+            for (let i = 0; i < p_x.length; i++) {
+                let res = this.a + this.b * 1 / p_x[i];
+                array.push(res);
+            }
+            return array;
+        }
+
+
         get y__dif__y_teor() {
             let array = [];
             for (let i = 0; i < this.n; i++) {
@@ -809,7 +876,7 @@ $(document).ready(function () {
     }
 
 
-    function loadStudent() {
+    function loadCriticalValues() {
         $('.work_button').attr('disabled', true);
 
 
@@ -817,13 +884,13 @@ $(document).ready(function () {
             url: 'student_critical.txt', success: function (data) {
 
                 if (!data) {
-                    alert('Ошибка загрузки Стьюдента. Перезагрузите страницу');
+                    alert('Ошибка загрузки таблицы критических значений Стьюдента. Перезагрузите страницу');
                     return false;
                 }
 
                 $('.work_button').attr('disabled', false);
 
-                student = [];
+                student_array = [];
 
                 data = data.trim();
                 let split = data.split('\n');
@@ -846,7 +913,47 @@ $(document).ready(function () {
                             num = parseFloat(line[3]);
                             break;
                     }
-                    student.push(num);
+                    student_array.push(num);
+                }
+
+            }
+        });
+
+        $.ajax({
+            url: 'phisher_critical.txt', success: function (data) {
+
+                if (!data) {
+                    alert('Ошибка загрузки таблицы критических значений Фишера. Перезагрузите страницу');
+                    return false;
+                }
+
+
+                $('.work_button').attr('disabled', false);
+
+                phisher_array = [];
+
+                data = data.trim();
+                let split = data.split('\n');
+                let first = split[0].split(' ');
+
+
+                for (let i = 1; i < split.length; i++) {
+                    let line = split[i].trim().split(' ');
+
+                    let num = 0;
+
+                    switch (znach) {
+                        case 0.05:
+                            num = parseFloat(line[1]);
+                            break;
+                        case 0.01:
+                            num = parseFloat(line[2]);
+                            break;
+                        case 0.001:
+                            num = parseFloat(line[3]);
+                            break;
+                    }
+                    phisher_array.push(num);
                 }
 
             }
