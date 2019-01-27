@@ -85,8 +85,9 @@ $(document).ready(function () {
         x = getData($Xinput);
         y = getData($Yinput);
         n = x.length;
-        student = student_array[n - 3];
-        phisher = phisher_array[n - 2];
+        alert(n);
+        student = student_array[n - 4];
+        phisher = phisher_array[n - 4];
     }
 
     class ecoFuntion {
