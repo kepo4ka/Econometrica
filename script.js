@@ -123,8 +123,7 @@ $(document).ready(function () {
 
         static average(p_array) {
             let sum = getArraySum(p_array);
-            let average = sum / p_array.length;
-            return average;
+            return sum / p_array.length;
         }
 
 
@@ -510,22 +509,22 @@ $(document).ready(function () {
 
 
             if (this.tb.check) {
-                $tb.addClass('text-success');
+                $tb.addClass('text-success').removeClass('text-danger');
             }
             else {
-                $tb.addClass('text-danger');
+                $tb.addClass('text-danger').removeClass('text-success');
             }
             if (this.ta.check) {
-                $ta.addClass('text-success');
+                $ta.addClass('text-success').removeClass('text-danger');
             }
             else {
-                $ta.addClass('text-danger');
+                $ta.addClass('text-danger').removeClass('text-success');
             }
             if (this.tr.check) {
-                $tr.addClass('text-success');
+                $tr.addClass('text-success').removeClass('text-danger');
             }
             else {
-                $tr.addClass('text-danger');
+                $tr.addClass('text-danger').removeClass('text-success');
             }
 
             $student.html(student);
