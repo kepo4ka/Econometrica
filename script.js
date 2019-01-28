@@ -1,3 +1,6 @@
+let test = {};
+
+
 $(document).ready(function () {
 
     const $Xinput = $('#dataX');
@@ -5,11 +8,21 @@ $(document).ready(function () {
     const $znach = $('.znach');
     const $prognoz = $('.prognoz');
 
+    let Xinput = Cookies.get('xinput');
+    let Yinput = Cookies.get('yinput');
+
+    if (Xinput && Yinput) {
+        $Xinput.val(Xinput);
+        $Yinput.val(Yinput);
+    }
+
+
     // const $start = $('.start');
     const $stepen_model_btn = $('.stepen_model_btn');
     const $linear_model_btn = $('.linear_model_btn');
     const $pokaz_model_btn = $('.pokaz_model_btn');
     const $giper_model_btn = $('.giper_model_btn');
+    const $logar_model_btn = $('.logar_model_btn');
 
     $('[data-toggle="tooltip"]').tooltip({
         animated: 'fade',
@@ -50,9 +63,9 @@ $(document).ready(function () {
 
         setup();
         const linear_reg = new Linear(x, y);
-        linear_reg.show();
 
-        console.log(linear_reg.gamma_Yp_max, linear_reg.gamma_Yp_min);
+        linear_reg.show();
+        test = linear_reg;
 
     });
 
@@ -62,6 +75,14 @@ $(document).ready(function () {
         setup();
         const stepen_reg = new Stepen(x, y);
         stepen_reg.show();
+    });
+    $logar_model_btn.on('click', function (e) {
+        e.preventDefault();
+
+        setup();
+        const logar_reg = new Logar(x, y);
+        test = logar_reg;
+        logar_reg.show();
     });
 
     $pokaz_model_btn.on('click', function (e) {
@@ -82,10 +103,13 @@ $(document).ready(function () {
 
 
     function setup() {
+
+        Cookies.set('xinput', $Xinput.val());
+        Cookies.set('yinput', $Yinput.val());
+
         x = getData($Xinput);
         y = getData($Yinput);
         n = x.length;
-        alert(n);
         student = student_array[n - 4];
         phisher = phisher_array[n - 4];
     }
@@ -283,7 +307,6 @@ $(document).ready(function () {
          * @return {number}
          */
         get Ma() {
-            console.log(this.Sost, this.x_pow_2_sum, this.x.length, this.x_gamma);
             return this.Sost * (Math.sqrt(this.x_pow_2_sum) / (this.x.length * this.x_gamma));
 
         }
@@ -542,7 +565,8 @@ $(document).ready(function () {
             }
 
 
-            grafik(customX, this.y_teor_customX(customX));
+            grafik(this.x, this.y, this.y_teor);
+            grafikCustom(customX, this.y_teor_customX(customX));
         }
 
 
@@ -670,6 +694,97 @@ $(document).ready(function () {
 
         get getFunctionStr() {
             return "10 ^ (" + this.a + ") * x ^ (" + this.b + ")";
+        }
+    }
+
+
+    class Logar extends Linear {
+        constructor(x, y) {
+            super(x, y);
+        }
+
+        get X() {
+            let new_array = [];
+            for (let i = 0; i < this.n; i++) {
+                new_array.push(Math.log10(this.x[i]));
+            }
+            return new_array;
+        }
+
+
+        get Xy() {
+            return ecoFuntion.multiple(this.X, this.y);
+        }
+
+        get Xy_average() {
+            return ecoFuntion.average(this.Xy);
+        }
+
+
+        get X_pow_2() {
+            return ecoFuntion.pow_2(this.X);
+        }
+
+
+        get X_average() {
+            return ecoFuntion.average(this.X);
+        }
+
+        get X_pow_2_average() {
+            return ecoFuntion.average(this.X_pow_2);
+        }
+
+        get b() {
+            return (this.Xy_average - this.y_average * this.X_average) / (this.X_pow_2_average - this.X_average * this.X_average);
+        }
+
+        get a() {
+            return this.y_average - this.b * this.X_average;
+        }
+
+        get y_teor() {
+            let array = [];
+            for (let i = 0; i < this.n; i++) {
+                let res = this.a + this.b * Math.log10(this.x[i]);
+                array.push(res);
+            }
+            return array;
+        }
+
+
+        y_teor_customX(p_x) {
+            let array = [];
+            for (let i = 0; i < p_x.length; i++) {
+                let res = this.a + this.b * Math.log10(p_x[i]);
+                array.push(res);
+            }
+            return array;
+        }
+
+
+        /**
+         * @return {number}
+         */
+        get X_gamma_pow_2() {
+            return this.X_pow_2_average - this.X_average * this.X_average;
+        }
+
+
+        /**
+         * @return {number}
+         */
+        get X_gamma() {
+            return Math.sqrt(this.X_gamma_pow_2);
+        }
+
+
+        get r_xy() {
+            return this.b * (this.X_gamma / this.y_gamma);
+        }
+
+
+        get getFunctionStr() {
+            return this.a + " + " + this.b + " * lg(x)";
         }
     }
 

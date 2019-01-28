@@ -98,7 +98,90 @@ function grafik(x, y, y_teor) {
 
 
     let coor1 = [];
+    let coor2 = [];
 
+
+    for (let i = 0; i < x.length; i++) {
+        let temp = [];
+
+        temp[0] = x[i];
+        temp[1] = y[i];
+        coor1.push(temp);
+
+        temp = [];
+
+        temp[0] = x[i];
+        temp[1] = y_teor[i];
+        coor2.push(temp);
+    }
+    coor1.sort(sortX);
+    coor2.sort(sortX);
+
+
+    Highcharts.chart('grafik', {
+
+        title: {
+            text: 'Теоритические значения Y'
+        },
+
+
+        legend: {
+            enabled: false,
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Y'
+            }
+        },
+        xAxis: {
+            title: {
+                text: 'X'
+            }
+        },
+
+        tooltip: {
+            headerFormat: '',
+            pointFormat: 'x = {point.x}, y = {point.y}'
+        },
+
+        series: [
+            {
+
+                type: 'scatter',
+                name: "Y",
+                data: coor1
+
+            },  {
+                name: "Линия тренда",
+                data: coor2
+
+            }
+
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 1200
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+}
+
+function grafikCustom(x, y) {
+    let coor1 = [];
 
     for (let i = 0; i < x.length; i++) {
         let temp = [];
@@ -109,11 +192,10 @@ function grafik(x, y, y_teor) {
     }
     coor1.sort(sortX);
 
-
-    Highcharts.chart('grafik', {
+    Highcharts.chart('grafik2', {
 
         title: {
-            text: 'Теоритические значения'
+            text: 'Теоритические значения Y при X = (0 : 1000)'
         },
 
 
@@ -143,7 +225,6 @@ function grafik(x, y, y_teor) {
             {
                 name: "Y",
                 data: coor1
-
             }
 
         ],
