@@ -23,6 +23,7 @@ $(document).ready(function () {
     const $pokaz_model_btn = $('.pokaz_model_btn');
     const $giper_model_btn = $('.giper_model_btn');
     const $logar_model_btn = $('.logar_model_btn');
+    const $obr_model_btn = $('.obr_model_btn');
 
     $('[data-toggle="tooltip"]').tooltip({
         animated: 'fade',
@@ -83,6 +84,14 @@ $(document).ready(function () {
         const logar_reg = new Logar(x, y);
         test = logar_reg;
         logar_reg.show();
+    });
+    $obr_model_btn.on('click', function (e) {
+        e.preventDefault();
+
+        setup();
+        const obr_reg = new Obrat(x, y);
+        test = obr_reg;
+        obr_reg.show();
     });
 
     $pokaz_model_btn.on('click', function (e) {
@@ -879,6 +888,95 @@ $(document).ready(function () {
 
         get getFunctionStr() {
             return "10 ^ (" + this.a + ") * 10 ^(" + this.b + " * x)";
+        }
+    }
+
+
+    class Obrat extends Linear {
+        constructor(x, y) {
+            super(x, y);
+        }
+
+        get Y() {
+            let new_array = [];
+            for (let i = 0; i < this.n; i++) {
+                new_array.push(1 / this.y[i]);
+            }
+            return new_array;
+        }
+
+
+        get xY() {
+            return ecoFuntion.multiple(this.x, this.Y);
+        }
+
+        get xY_average() {
+            return ecoFuntion.average(this.xY);
+        }
+
+
+        get Y_pow_2() {
+            return ecoFuntion.pow_2(this.Y);
+        }
+
+
+        get Y_average() {
+            return ecoFuntion.average(this.Y);
+        }
+
+        get Y_pow_2_average() {
+            return ecoFuntion.average(this.Y_pow_2);
+        }
+
+        get b() {
+            return (this.xY_average - this.Y_average * this.x_average) / (this.x_pow_2_average - this.x_average * this.x_average);
+        }
+
+        get a() {
+            return this.Y_average - this.b * this.x_average;
+        }
+
+
+        get y_teor() {
+            let array = [];
+            for (let i = 0; i < this.n; i++) {
+                let res = 1 / (this.a + this.b * this.x[i]);
+                array.push(res);
+            }
+            return array;
+        }
+
+        y_teor_customX(p_x) {
+            let array = [];
+            for (let i = 0; i < p_x.length; i++) {
+                let res =1 / (this.a + this.b * p_x[i]);
+                array.push(res);
+            }
+            return array;
+        }
+
+
+        /**
+         * @return {number}
+         */
+        get Y_gamma_pow_2() {
+            return this.Y_pow_2_average - this.Y_average * this.Y_average;
+        }
+
+
+        /**
+         * @return {number}
+         */
+        get Y_gamma() {
+            return Math.sqrt(this.Y_gamma_pow_2);
+        }
+
+        get r_xy() {
+            return this.b * (this.x_gamma / this.Y_gamma);
+        }
+
+        get getFunctionStr() {
+            return "1 / (" + this.a + " + " + this.b + "* x)";
         }
     }
 
