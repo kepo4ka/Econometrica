@@ -203,6 +203,9 @@ $(document).ready(function () {
             return (this.xy_average - this.y_average * this.x_average) / (this.x_pow_2_average - this.x_average * this.x_average);
         }
 
+        get elast() {
+            return this.b * this.x_average / this.y_average;
+        }
 
         get y_teor() {
             let array = [];
@@ -418,11 +421,11 @@ $(document).ready(function () {
         }
 
         get gamma_Yp_min() {
-            return this.Xp - this.delta_Yp;
+            return this.Yp - this.delta_Yp;
         }
 
         get gamma_Yp_max() {
-            return this.Xp + this.delta_Yp;
+            return this.Yp + this.delta_Yp;
         }
 
 
@@ -446,6 +449,7 @@ $(document).ready(function () {
             const $table = $('.table');
             const $b = $table.find('.var_b');
             const $a = $table.find('.var_a');
+            const $elast = $table.find('.var_elast');
             const $regres_function = $table.find('.var_regres_function');
             const $r_xy = $table.find('.var_r_xy');
             const $r_xy_pow_2 = $table.find('.var_r_xy_pow_2');
@@ -457,6 +461,7 @@ $(document).ready(function () {
             const $Mb = $table.find('.var_Mb');
             const $Ma = $table.find('.var_Ma');
             const $Mr = $table.find('.var_Mr');
+
 
             const $tb = $table.find('.var_tb');
             const $ta = $table.find('.var_ta');
@@ -483,6 +488,7 @@ $(document).ready(function () {
 
             $b.html(this.b);
             $a.html(this.a);
+            $elast.html(this.elast);
             $regres_function.html(this.getFunctionStr);
             $r_xy.html(this.r_xy);
             $r_xy_pow_2.html(this.r_xy_pow_2);
@@ -552,7 +558,7 @@ $(document).ready(function () {
                     $delta_b.html(this.delta_b);
 
                     $delta_Yp.html(this.delta_Yp);
-                    $gamma_Yp.html(this.Xp + " ± " + this.delta_Yp);
+                    $gamma_Yp.html(this.Yp + " ± " + this.delta_Yp);
                     $Dy.html(this.Dy);
                 }
                 else {
