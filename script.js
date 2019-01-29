@@ -565,7 +565,13 @@ $(document).ready(function () {
                 if (this.interval_zero) {
                     $var_analiz_dov_interval.html('С вероятностью ' + (1 - znach) + " параметры a и b не принимают нулевых значений и не являются статистически незначимыми");
 
-                    $Xp.html(this.Xp);
+                   
+                }
+                else {
+                    $var_analiz_dov_interval.html('С вероятностью ' + (1 - znach) + " параметры a и b принимают нулевые значения и являются статистически незначимыми");
+                }
+
+             $Xp.html(this.Xp);
                     $Yp.html(this.Yp);
                     $M_Yp.html(this.M_Yp);
 
@@ -575,11 +581,6 @@ $(document).ready(function () {
                     $delta_Yp.html(this.delta_Yp);
                     $gamma_Yp.html(this.Yp + " ± " + this.delta_Yp);
                     $Dy.html(this.Dy);
-                }
-                else {
-                    $var_analiz_dov_interval.html('С вероятностью ' + (1 - znach) + " параметры a и b принимают нулевые значения и являются статистически незначимыми");
-                }
-
 
             grafik(this.x, this.y, this.y_teor);
             grafikCustom(customX, this.y_teor_customX(customX));
