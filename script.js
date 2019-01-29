@@ -546,7 +546,13 @@ $(document).ready(function () {
 
             if (this.check_H0_student) {
                 $H0.html('Гипотеза H0 отклоняется: a,b r_xy не случайно отличаются от нуля, а статистически значимы');
-                $gamma_a.html(this.a + " ± " + this.delta_a);
+                
+            }
+            else {
+                $H0.html('Гипотеза H0 принимается: a,b r_xy случайно отличаются от нуля и статистически НЕзначимы');
+            }
+            
+            $gamma_a.html(this.a + " ± " + this.delta_a);
                 $gamma_b.html(this.b + " ± " + this.delta_b);
 
                 if (this.interval_a_zero) {
@@ -573,10 +579,6 @@ $(document).ready(function () {
                 else {
                     $var_analiz_dov_interval.html('С вероятностью ' + (1 - znach) + " параметры a и b принимают нулевые значения и являются статистически незначимыми");
                 }
-            }
-            else {
-                $H0.html('Гипотеза H0 принимается: a,b r_xy случайно отличаются от нуля и статистически НЕзначимы');
-            }
 
 
             grafik(this.x, this.y, this.y_teor);
