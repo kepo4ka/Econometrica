@@ -1,55 +1,43 @@
 $(document).ready(function () {
-
     const $matrix_input = $('#canonMatrix');
     const $log = $('.log');
     const $simplex_start = $('.simplex_start');
     const $simplex_table = $('.simplex_table').clone();
     const $extremum = $('#extremum');
 
-
-    let f_function = [];
-    let matrix = [];
     let data = [];
+    let type = 'max';
+
 
     $('.nice-select').niceSelect();
 
     $simplex_start.on('click', function (e) {
         e.preventDefault();
-
-        let extr_type = $extremum.val();
-
-        if (extr_type == 'min') {
-            alert('Не знаю как решать задачи на минимум :(');
-            return false;
-        }
-        simplex($extremum.val());
+        type = $extremum.val();
+        simplex();
     });
 
-
-    function simplex(type) {
+    function simplex() {
         $log.html("");
-
         let t = '';
-
         data = getMatrix($matrix_input);
 
         if (!data) {
             alert('Не удалось распознать Условие задачи. Возможна ошибка при вводе');
         }
 
-        // if (type == 'min') {
-        //     for (let i = 0; i < data.f.length; i++) {
-        //         if (data.f[i] !== 0) {
-        //             data.f[i] *= (-1);
-        //         }
-        //     }
-        // }
-
-
         data.bazis = getFirstBazis(data);
         data.simplex = getSimplexTable(data);
 
-        let lead = getLeadElem(data);
+        let lead;
+
+        if (type == 'max') {
+            lead = getLeadElemForMax(data);
+        }
+        else {
+            lead = getLeadElemForMin(data);
+        }
+
         data.lead = {i: lead.i, j: lead.j};
         data.relations = lead.relations;
         showTable(data, 1);
@@ -60,6 +48,7 @@ $(document).ready(function () {
         data.simplex = new_simplex.simplex;
         data.f = new_simplex.f;
         showTable(data, 2, checkEnd(data));
+
         t += JSON.stringify(data) + "\n";
 
 
@@ -67,7 +56,15 @@ $(document).ready(function () {
 
         while (!checkEnd(data)) {
             data.bazis = getBazis(data);
-            let lead = getLeadElem(data);
+            let lead = '';
+
+            if (type == 'max') {
+                lead = getLeadElemForMax(data);
+            }
+            else {
+                lead = getLeadElemForMin(data);
+            }
+
             data.lead = {i: lead.i, j: lead.j};
             data.relations = lead.relations;
 
@@ -75,7 +72,10 @@ $(document).ready(function () {
             data.simplex = new_simplex.simplex;
             data.f = new_simplex.f;
             t += JSON.stringify(data) + "\n";
-            showTable(data, step++, checkEnd(data));
+
+            const check = checkEnd(data);
+
+            showTable(data, step++, check);
 
         }
         console.log(t);
@@ -92,9 +92,181 @@ $(document).ready(function () {
         }
         free_elems += data.simplex[data.m - 2][data.m - 1];
 
-        $log.append("<h1>Функция в точке <span class='font-weight-bold text-primary'>(" + free_elems + ")</span> достигает максимума = <span class='font-weight-bold text-success'>" + data.f[data.m - 1] + "</span></h1>");
+        let extr_name = '';
 
+        if (type == 'max') {
+            extr_name = 'Максимума';
+        }
+        else {
+            extr_name = 'Минимума';
+        }
+
+        $log.append("<h1>Функция в точке <span class='font-weight-bold text-primary'>(" + free_elems + ")</span> достигает " + extr_name + " = <span class='font-weight-bold text-success'>" + data.f[data.m - 1] + "</span></h1>");
     }
+
+
+    function getLeadElemForMax(data, show) {
+        let relations_array = [];
+        let min = Number.MAX_VALUE;
+        let index = 0;
+        for (let i = 0; i < data.m - 1; i++) {
+            if (data.f[i] < min) {
+                min = data.f[i];
+                index = i;
+            }
+        }
+
+        if (index < 0) {
+            return false;
+        }
+
+        for (let i = 0; i < data.m - 1; i++) {
+            let value = NaN;
+
+            value = data.simplex[i][data.m - 1] / data.simplex[i][index];
+            if (value < 0) {
+                // value = NaN;
+            }
+
+            if (!isFinite(value)) {
+                relations_array.push(NaN);
+            }
+            else {
+                relations_array.push(value);
+                min = value;
+            }
+        }
+        let jindex = 0;
+        min = Number.MAX_VALUE;
+
+
+        for (let i = 0; i < relations_array.length; i++) {
+            if (relations_array[i] < min && !isNaN(relations_array[i])) {
+                min = relations_array[i];
+                jindex = i;
+            }
+        }
+
+        return {
+            i: jindex,
+            j: index,
+            relations: relations_array
+        };
+    }
+
+    function checkEnd(data) {
+        for (let j = 0; j < data.f.length; j++) {
+            if (type == 'max') {
+                if (data.f[j] < 0) {
+                    return false;
+                }
+            }
+            else {
+                if (data.f[j] > 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    function getLeadElemForMin(data, show) {
+        let relations_array = [];
+        let max = 0;
+        let index = 0;
+        for (let i = 0; i < data.m - 1; i++) {
+            if (data.f[i] > max) {
+                max = data.f[i];
+                index = i;
+            }
+        }
+        if (index < 0) {
+            return false;
+        }
+
+        for (let i = 0; i < data.m - 1; i++) {
+            let value = NaN;
+
+            value = data.simplex[i][data.m - 1] / data.simplex[i][index];
+
+            if (value < 0) {
+                value = NaN;
+            }
+
+            if (!isFinite(value)) {
+                relations_array.push(NaN);
+            }
+            else {
+                relations_array.push(value);
+            }
+        }
+
+        let jindex = 0;
+        let min = Number.MAX_VALUE;
+
+        for (let i = 0; i < relations_array.length; i++) {
+            if (relations_array[i] < min && !isNaN(relations_array[i])) {
+                min = relations_array[i];
+                jindex = i;
+            }
+        }
+
+        console.log(jindex, index);
+
+        return {
+            i: jindex,
+            j: index,
+            relations: relations_array
+        };
+    }
+
+
+    function newSimplexTable(data, show) {
+        let simplex = [];
+        let old_simplex = JSON.parse(JSON.stringify(data.simplex));
+
+
+        for (let i = 0; i < data.m - 1; i++) {
+            simplex[i] = [];
+            for (let j = 0; j < data.m; j++) {
+                simplex[i][j] = 0;
+            }
+        }
+
+        if (old_simplex[data.lead.i][data.lead.j] !== 1) {
+
+            let znam = old_simplex[data.lead.i][data.lead.j] + 1 - 1;
+
+            for (let j = 0; j < data.m; j++) {
+                old_simplex[data.lead.i][j] = (old_simplex[data.lead.i][j] / znam);
+            }
+        }
+
+
+        for (let i = 0; i < data.m - 1; i++) {
+            for (let j = 0; j < data.m; j++) {
+                if (i == data.lead.j) {
+                    simplex[i][j] = old_simplex[data.lead.i][j];
+                }
+                else {
+                    simplex[i][j] = old_simplex[i][j] - (old_simplex[data.lead.i][j] * old_simplex[i][data.lead.j]);
+                }
+            }
+        }
+
+        let f = [];
+        for (let j = 0; j < data.f.length; j++) {
+            let val = data.f[j] - (simplex[data.lead.j][j] * data.f[data.lead.j]);
+            f.push(val);
+        }
+
+        return {
+            simplex: simplex,
+            f: f
+        }
+    }
+
 
     function showTable(pData, pStep, ilast) {
         const $table = $simplex_table.clone();
@@ -142,7 +314,14 @@ $(document).ready(function () {
             let $row = $(row);
 
             $row.append("<td>X" + (i + 1) + "</td>");
-            let new_lead = getLeadElem(data);
+            let new_lead;
+
+            if (type == 'max') {
+                new_lead = getLeadElemForMax(data);
+            }
+            else {
+                new_lead = getLeadElemForMin(data);
+            }
 
             for (let j = 0; j < pData.m; j++) {
 
@@ -175,65 +354,6 @@ $(document).ready(function () {
     }
 
 
-    function log(pdata) {
-        let json = JSON.stringify(pdata);
-        $log.append(json);
-        $log.append("<hr>");
-    }
-
-    function checkEnd(data) {
-        for (let j = 0; j < data.f.length; j++) {
-            if (data.f[j] < 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    function newSimplexTable(data, show) {
-        let simplex = [];
-        let old_simplex = JSON.parse(JSON.stringify(data.simplex));
-
-        for (let i = 0; i < data.m - 1; i++) {
-            simplex[i] = [];
-            for (let j = 0; j < data.m; j++) {
-                simplex[i][j] = 0;
-            }
-        }
-
-        if (old_simplex[data.lead.i][data.lead.j] !== 1) {
-
-            let znam = old_simplex[data.lead.i][data.lead.j] + 1 - 1;
-
-            for (let j = 0; j < data.m; j++) {
-                old_simplex[data.lead.i][j] = (old_simplex[data.lead.i][j] / znam);
-            }
-        }
-
-        for (let i = 0; i < data.m - 1; i++) {
-            for (let j = 0; j < data.m; j++) {
-                if (i == data.lead.j) {
-                    simplex[i][j] = old_simplex[data.lead.i][j];
-                }
-                else {
-                    simplex[i][j] = old_simplex[i][j] - (old_simplex[data.lead.i][j] * old_simplex[i][data.lead.j]);
-                }
-            }
-        }
-
-        let f = [];
-        for (let j = 0; j < data.f.length; j++) {
-            let val = data.f[j] - (simplex[data.lead.j][j] * data.f[data.lead.j]);
-            f.push(val);
-        }
-
-        return {
-            simplex: simplex,
-            f: f
-        }
-    }
-
     function getSimplexTable(data) {
         let simplex = [];
         for (let i = 0; i < data.m - 1; i++) {
@@ -253,57 +373,6 @@ $(document).ready(function () {
         }
 
         return simplex;
-    }
-
-
-    function getLeadElem(data, show) {
-        let relations_array = [];
-        let min = Number.MAX_VALUE;
-        let index = 0;
-        for (let i = 0; i < data.m - 1; i++) {
-            if (data.f[i] < min) {
-                min = data.f[i];
-                index = i;
-            }
-        }
-
-
-        if (index < 0) {
-            return false;
-        }
-
-        for (let i = 0; i < data.m - 1; i++) {
-            let value = NaN;
-
-            if (data.simplex[i][data.m - 1] > 0 && data.simplex[i][index] > 0) {
-
-                value = data.simplex[i][data.m - 1] / data.simplex[i][index];
-            }
-
-            if (!isFinite(value)) {
-                relations_array.push(NaN);
-            }
-            else {
-                relations_array.push(value);
-                min = value;
-            }
-        }
-        let jindex = 0;
-        min = Number.MAX_VALUE;
-
-
-        for (let i = 0; i < relations_array.length; i++) {
-            if (relations_array[i] < min && !isNaN(relations_array[i])) {
-                min = relations_array[i];
-                jindex = i;
-            }
-        }
-
-        return {
-            i: jindex,
-            j: index,
-            relations: relations_array
-        };
     }
 
     function getBazis(data) {
@@ -343,6 +412,7 @@ $(document).ready(function () {
         return bazis_array;
     }
 
+
     function getFirstBazis(data) {
         let bazis_array = [];
         for (let i = 0; i < data.n; i++) {
@@ -378,7 +448,6 @@ $(document).ready(function () {
         }
         return bazis_array;
     }
-
 
     function getMatrix($input) {
         let val = $input.val();
@@ -431,6 +500,13 @@ $(document).ready(function () {
             m: m,
             n: matrix.length
         };
+    }
+
+
+    function log(pdata) {
+        let json = JSON.stringify(pdata);
+        $log.append(json);
+        $log.append("<hr>");
     }
 
 
