@@ -33,10 +33,12 @@ $(document).ready(function () {
 
         if (type == 'max') {
             lead = getLeadElemForMax(data);
+            console.log(lead);
         }
         else {
             lead = getLeadElemForMin(data);
         }
+
 
         data.lead = {i: lead.i, j: lead.j};
         data.relations = lead.relations;
@@ -45,10 +47,11 @@ $(document).ready(function () {
         t += JSON.stringify(data) + "\n";
 
         let new_simplex = newSimplexTable(data);
+
         data.simplex = new_simplex.simplex;
         data.f = new_simplex.f;
         showTable(data, 2, checkEnd(data));
-
+        return false;
         t += JSON.stringify(data) + "\n";
 
 
@@ -78,7 +81,6 @@ $(document).ready(function () {
             showTable(data, step++, check);
 
         }
-        console.log(t);
 
 
         $log.append("<hr>");
@@ -108,11 +110,14 @@ $(document).ready(function () {
     function getLeadElemForMax(data, show) {
         let relations_array = [];
         let min = Number.MAX_VALUE;
-        let index = 0;
+        let index = [];
         for (let i = 0; i < data.m - 1; i++) {
             if (data.f[i] < min) {
                 min = data.f[i];
-                index = i;
+                index.push(i);
+            }
+            else if (data.f[i] === min) {
+                index.push(i);
             }
         }
 
@@ -120,10 +125,25 @@ $(document).ready(function () {
             return false;
         }
 
+        let max = -Number.MAX_VALUE;
+        let max_index = 0;
+
+        for (let j = 0; j < index.length; j++) {
+            for (let i = 0; i < data.n; i++) {
+
+                let temp = data.simplex[i][index[j]];
+                if (temp > max) {
+                    max = temp;
+                    max_index = index[j];
+                }
+            }
+        }
+
+
         for (let i = 0; i < data.m - 1; i++) {
             let value = NaN;
+            value = data.simplex[i][data.m - 1] / data.simplex[i][max_index];
 
-            value = data.simplex[i][data.m - 1] / data.simplex[i][index];
             if (value < 0) {
                 // value = NaN;
             }
@@ -133,9 +153,9 @@ $(document).ready(function () {
             }
             else {
                 relations_array.push(value);
-                min = value;
             }
         }
+
         let jindex = 0;
         min = Number.MAX_VALUE;
 
@@ -149,7 +169,7 @@ $(document).ready(function () {
 
         return {
             i: jindex,
-            j: index,
+            j: max_index,
             relations: relations_array
         };
     }
@@ -212,7 +232,6 @@ $(document).ready(function () {
             }
         }
 
-        console.log(jindex, index);
 
         return {
             i: jindex,
