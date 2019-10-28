@@ -8,32 +8,49 @@
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="lib/jquery-nice-select-1.1.0/css/nice-select.css">
     <link rel="stylesheet" href="style.css">
-</head>
 
+    <script defer src="lib/jquery/jquery-3.3.1.min.js"></script>
+    <script defer src="lib/bootstrap/bootstrap.min.js"></script>
+    <script defer src="lib/jquery-nice-select-1.1.0/js/jquery.nice-select.min.js"></script>
+
+    <script defer src="assets/js/hepler.js"></script>
+    <script defer src="assets/js/simplex.js"></script>
+</head>
 <body>
 
 <header class="bg-light mb-2">
     <div class="container">
-
-        <ul class="nav">
+        <ul class="nav d-flex align-items-center">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Симплекс метод</a>
+                <h1 class="nav-link active" href="#">
+                    Симплекс метод
+                </h1>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    Эконометрика
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sedlovaya.html">
+                    Поиск седловой
+                </a>
             </li>
 
         </ul>
     </div>
 </header>
 
-<section>
+<section class="my-5">
     <div class="container">
         <div class="row">
             <div class="col-12">
-
-                <form class="row " action="">
-
+                <form class="row" action="">
                     <div class="col-12 my-3">
                         <div class="form-group">
-                            <label class="d-block" for="extremum">Тип экстремума</label>
+                            <label class="d-block" for="extremum">
+                                Тип экстремума
+                            </label>
                             <select class="nice-select" name="extremum" id="extremum">
                                 <option value="max">Max</option>
                                 <option value="min">Min</option>
@@ -79,7 +96,6 @@
 
                     </div>
 
-
                     <div class="col-12 my-3">
                         <button class="btn btn-outline-primary simplex_start">Решить симплекс методом</button>
                     </div>
@@ -92,32 +108,17 @@
                             </tbody>
                         </table>
                         <div class="log">
-
                         </div>
                     </div>
 
 
                     <!--<button class="btn btn-block btn-primary start">Рассчитать</button>-->
                 </form>
-
             </div>
         </div>
-
-
         <div class="row mt-3">
-
         </div>
     </div>
-
 </section>
-
-
-<script src="lib/jquery/jquery-3.3.1.min.js"></script>
-<script src="lib/bootstrap/bootstrap.min.js"></script>
-<script src="lib/jquery-nice-select-1.1.0/js/jquery.nice-select.min.js"></script>
-
-<script src="hepler.js"></script>
-<script src="simplex.js"></script>
 </body>
-
 </html>
