@@ -12,8 +12,10 @@ $(document).ready(function () {
     let matrix = [];
 
     let old_value = localStorage.getItem('sedlovaya');
-    $matrix_input.val(old_value);
-
+    if (old_value)
+    {
+     $matrix_input.val(old_value);
+    }
     $('.nice-select').niceSelect();
 
     $start.on('click', function (e) {
